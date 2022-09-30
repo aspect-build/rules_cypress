@@ -71,7 +71,7 @@ mylang_toolchain = rule(
             mandatory = False,
         ),
     },
-    doc = """Defines a mylang compiler/runtime toolchain.
+    doc = """Defines a cypress compiler/runtime toolchain.
 
 For usage see https://docs.bazel.build/versions/main/toolchains.html#defining-toolchains.
 """,
