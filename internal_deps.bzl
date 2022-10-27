@@ -54,7 +54,7 @@ def rules_mylang_internal_deps():
 
     http_archive(
         name = "aspect_bazel_lib",
-        sha256 = "79381b0975ba7d2d5653239e5bab12cf54d89b10217fe771b8edd95047a2e44b",
-        strip_prefix = "bazel-lib-1.12.1",
-        url = "https://github.com/aspect-build/bazel-lib/archive/refs/tags/v1.12.1.tar.gz",
+        sha256 = "9305799c6d9e425e6b73270a0f9eb0aa1082050823a7eefad95edcece545e77b",
+        strip_prefix = "bazel-lib-1.14.0",
+        url = "https://github.com/aspect-build/bazel-lib/archive/refs/tags/v1.14.0.tar.gz",
     )
