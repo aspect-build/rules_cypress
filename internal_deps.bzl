@@ -4,11 +4,8 @@ Users should *not* need to install these. If users see a load()
 statement from these, that's a bug in our distribution.
 """
 
-load("@bazel_tools//tools/build_defs/repo:http.bzl", _http_archive = "http_archive")
-load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
-
-def http_archive(name, **kwargs):
-    maybe(_http_archive, name = name, **kwargs)
+# buildifier: disable=bzl-visibility
+load("//cypress/private:maybe.bzl", http_archive = "maybe_http_archive")
 
 def rules_mylang_internal_deps():
     "Fetch deps needed for local development"
@@ -54,7 +51,7 @@ def rules_mylang_internal_deps():
 
     http_archive(
         name = "aspect_bazel_lib",
-        sha256 = "9305799c6d9e425e6b73270a0f9eb0aa1082050823a7eefad95edcece545e77b",
-        strip_prefix = "bazel-lib-1.14.0",
-        url = "https://github.com/aspect-build/bazel-lib/archive/refs/tags/v1.14.0.tar.gz",
+        sha256 = "eae670935704ce5f9d050b2c23d426b4ae453458830eebdaac1f11a6a9da150b",
+        strip_prefix = "bazel-lib-1.15.0",
+        url = "https://github.com/aspect-build/bazel-lib/archive/refs/tags/v1.15.0.tar.gz",
     )
