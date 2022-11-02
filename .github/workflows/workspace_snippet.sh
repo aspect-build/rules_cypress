@@ -5,7 +5,7 @@ set -o errexit -o nounset -o pipefail
 # Set by GH actions, see
 # https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables
 TAG=${GITHUB_REF_NAME}
-PREFIX="rules_mylang-${TAG:1}"
+PREFIX="rules_cypress-${TAG:1}"
 SHA=$(git archive --format=tar --prefix=${PREFIX}/ ${TAG} | gzip | shasum -a 256 | awk '{print $1}')
 
 cat << EOF
@@ -16,7 +16,7 @@ http_archive(
     name = "aspect_rules_cypress",
     sha256 = "${SHA}",
     strip_prefix = "${PREFIX}",
-    url = "https://github.com/aspect-build/rules_mylang/archive/refs/tags/${TAG}.tar.gz",
+    url = "https://github.com/aspect-build/rules_cypress/archive/refs/tags/${TAG}.tar.gz",
 )
 EOF
 
