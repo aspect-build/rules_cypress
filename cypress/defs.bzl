@@ -1,22 +1,13 @@
 "Public API re-exports"
 
-load("@aspect_rules_cypress//cypress/private:cypress_module_test.bzl", cypress_module_test_lib = "lib")
-load("@aspect_rules_cypress//cypress/private:cypress_cli_test.bzl", cypress_cli_test_lib = "lib")
+load("@aspect_rules_cypress//cypress/private:cypress_test.bzl", "cypress_test_lib")
 load("@aspect_rules_js//js:libs.bzl", "js_binary_lib")
 load("@aspect_bazel_lib//lib:directory_path.bzl", "directory_path")
 
-_cypress_module_test = rule(
-    doc = """Runs tests against the Cypress test runner.""",
-    attrs = cypress_module_test_lib.attrs,
-    implementation = cypress_module_test_lib.implementation,
-    test = True,
-    toolchains = js_binary_lib.toolchains + ["@aspect_rules_cypress//cypress:toolchain_type"],
-)
-
-_cypress_cli_test = rule(
-    doc = """Identical to js_test, except entry point is set to cypress CLI with the cypress toolchain available""",
-    implementation = cypress_cli_test_lib.implementation,
-    attrs = cypress_cli_test_lib.attrs,
+_cypress_test = rule(
+    doc = """Identical to js_test with the addition of the cypress toolchain made available.""",
+    attrs = cypress_test_lib.attrs,
+    implementation = cypress_test_lib.implementation,
     test = True,
     toolchains = js_binary_lib.toolchains + ["@aspect_rules_cypress//cypress:toolchain_type"],
 )
@@ -43,7 +34,7 @@ def cypress_cli_test(name, cypress = "//:node_modules/cypress", **kwargs):
         tags = ["manual"],
     )
 
-    _cypress_cli_test(
+    _cypress_test(
         name = name,
         entry_point = entry_point,
         data = kwargs.pop("data", []) + [
@@ -84,7 +75,7 @@ def cypress_module_test(name, runner, cypress = "//:node_modules/cypress", **kwa
         cypress: The cypress npm package which was already linked using an API like npm_link_all_packages.
         **kwargs: All other args from `js_test`. See https://github.com/aspect-build/rules_js/blob/main/docs/js_binary.md#js_test
     """
-    _cypress_module_test(
+    _cypress_test(
         name = name,
         enable_runfiles = select({
             "@aspect_rules_js//js/private:enable_runfiles": True,
@@ -92,5 +83,8 @@ def cypress_module_test(name, runner, cypress = "//:node_modules/cypress", **kwa
         }),
         entry_point = runner,
         chdir = native.package_name(),
+        data = kwargs.pop("data", []) + [
+            cypress,
+        ],
         **kwargs
     )

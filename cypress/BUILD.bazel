@@ -30,8 +30,7 @@ bzl_library(
     srcs = ["defs.bzl"],
     visibility = ["//visibility:public"],
     deps = [
-        "@aspect_rules_cypress//cypress/private:cypress_cli_test",
-        "@aspect_rules_cypress//cypress/private:cypress_module_test",
+        "@aspect_rules_cypress//cypress/private:cypress_test",
         "@aspect_rules_js//js:libs",
     ],
 )

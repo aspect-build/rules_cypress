@@ -7,17 +7,19 @@ bzl_library(
 )
 
 bzl_library(
-    name = "cypress_module_test",
+    name = "cypress_test",
     srcs = [
-        "cypress_module_test.bzl",
+        "cypress_test.bzl",
     ],
     visibility = ["@aspect_rules_cypress//cypress:__subpackages__"],
 )
 
 bzl_library(
-    name = "cypress_cli_test",
-    srcs = [
-        "cypress_cli_test.bzl",
+    name = "maybe",
+    srcs = ["maybe.bzl"],
+    visibility = ["//cypress:__subpackages__"],
+    deps = [
+        "@bazel_tools//tools/build_defs/repo:http.bzl",
+        "@bazel_tools//tools/build_defs/repo:utils.bzl",
     ],
-    visibility = ["@aspect_rules_cypress//cypress:__subpackages__"],
 )

@@ -25,7 +25,7 @@ Fetch external tools needed for cypress toolchain
 | <a id="cypress_repositories-cypress_version"></a>cypress_version |  -   | String | required |  |
 | <a id="cypress_repositories-platform"></a>platform |  -   | String | required |  |
 | <a id="cypress_repositories-repo_mapping"></a>repo_mapping |  A dictionary from local repository name to global repository name. This allows controls over workspace dependency resolution for dependencies of this repository.&lt;p&gt;For example, an entry <code>"@foo": "@bar"</code> declares that, for any time this repository depends on <code>@foo</code> (such as a dependency on <code>@foo//some:target</code>, it should actually resolve that dependency within globally-declared <code>@bar</code> (<code>@bar//some:target</code>).   | <a href="https://bazel.build/rules/lib/dict">Dictionary: String -> String</a> | required |  |
-| <a id="cypress_repositories-sha256"></a>sha256 |  -   | String | optional | "" |
+| <a id="cypress_repositories-sha256"></a>sha256 |  -   | String | optional | <code>""</code> |
 
 
 <a id="cypress_register_toolchains"></a>

@@ -41,7 +41,7 @@ def _impl(ctx):
         ),
     ]
 
-lib = struct(
+cypress_test_lib = struct(
     attrs = _attrs,
     implementation = _impl,
 )

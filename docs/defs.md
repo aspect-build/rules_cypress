@@ -49,7 +49,7 @@ const cypress = require('cypress')
 
 cypress.run({
 headless: true,
-}).then(result => {
+}).then(result =&gt; {
 if (result.status === 'failed') {
     process.exit(1);
 }
