@@ -3,8 +3,13 @@
 load("@aspect_bazel_lib//lib:docs.bzl", "stardoc_with_diff_test", "update_docs")
 
 stardoc_with_diff_test(
-    name = "rules",
-    bzl_library_target = "//cypress:defs",
+    name = "defs",
+    bzl_library_target = "@aspect_rules_cypress//cypress:defs",
+)
+
+stardoc_with_diff_test(
+    name = "repositories",
+    bzl_library_target = "@aspect_rules_cypress//cypress:repositories",
 )
 
 update_docs(name = "update")

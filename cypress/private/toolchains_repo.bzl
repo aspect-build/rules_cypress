@@ -20,30 +20,22 @@ with only the toolchain attribute pointing into the platform-specific repositori
 # Add more platforms as needed to mirror all the binaries
 # published by the upstream project.
 PLATFORMS = {
-    "x86_64-apple-darwin": struct(
-        compatible_with = [
-            "@platforms//os:macos",
-            "@platforms//cpu:x86_64",
-        ],
-    ),
-    "aarch64-apple-darwin": struct(
-        compatible_with = [
-            "@platforms//os:macos",
-            "@platforms//cpu:aarch64",
-        ],
-    ),
-    "x86_64-unknown-linux-gnu": struct(
-        compatible_with = [
-            "@platforms//os:linux",
-            "@platforms//cpu:x86_64",
-        ],
-    ),
-    "x86_64-pc-windows-msvc": struct(
-        compatible_with = [
-            "@platforms//os:windows",
-            "@platforms//cpu:x86_64",
-        ],
-    ),
+    "darwin-x64":struct(compatible_with = [
+        "@platforms//os:macos",
+        "@platforms//cpu:x86_64",
+    ]),
+    "darwin-arm64":struct(compatible_with = [
+        "@platforms//os:macos",
+        "@platforms//cpu:aarch64",
+    ]),
+    "linux-x64":struct(compatible_with = [
+        "@platforms//os:linux",
+        "@platforms//cpu:x86_64",
+    ]),
+    "linux-arm64":struct(compatible_with = [
+        "@platforms//os:linux",
+        "@platforms//cpu:aarch64",
+    ]),
 }
 
 def _toolchains_repo_impl(repository_ctx):

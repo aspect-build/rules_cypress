@@ -28,8 +28,8 @@ def _cypress_toolchain_impl(ctx):
     target_tool_path = ctx.attr.target_tool_path
 
     if ctx.attr.target_tool:
-        tool_files = ctx.attr.target_tool.files.to_list()
-        target_tool_path = _to_manifest_path(ctx, tool_files[0])
+        tool_files = ctx.attr.target_tool_files.files.to_list()
+        target_tool_path = _to_manifest_path(ctx, ctx.attr.target_tool.files.to_list()[0])
 
     # Make the $(tool_BIN) variable available in places like genrules.
     # See https://docs.bazel.build/versions/main/be/make-variables.html#custom_variables
@@ -65,6 +65,11 @@ cypress_toolchain = rule(
             doc = "A hermetically downloaded executable target for the target platform.",
             mandatory = False,
             allow_single_file = True,
+        ),
+        "target_tool_files": attr.label(
+            doc = "Files required in runfiles to make the cypress executable available.",
+            mandatory = False,
+            allow_files = True,
         ),
         "target_tool_path": attr.string(
             doc = "Path to an existing executable for the target platform.",
