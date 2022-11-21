@@ -53,7 +53,7 @@ def cypress_module_test(name, runner, cypress = "//:node_modules/cypress", **kwa
 
     The environment is bootstrapped by first setting the environment variable `CYPRESS_RUN_BINARY` to the binary downloaded by the cypress toolchain. See https://docs.cypress.io/guides/references/advanced-installation#Run-binary
 
-    After the setting up environment variables, the node program then calls `require` on the `.js` test runner you provide as an attribute. That test runner is expected to call into cypress's module API to bootstrap testing.
+    You will provide a test runner, via the runner attribute, which is expected to call into cypress's module API to bootstrap testing.
 
     Example `runner.js`:
     ```
@@ -67,6 +67,11 @@ def cypress_module_test(name, runner, cypress = "//:node_modules/cypress", **kwa
     }
     })
     ```
+
+    In most scenarios, it is easier to use cypress_cli_test. But in some scenarios, you may need more flexibility:
+      - Accessing to the test results directly after the run and do something with them.
+      - Reruning a failing spec file
+      - Kicking off other builds or scripts
 
     Args:
         name: The name used for this rule and output files
