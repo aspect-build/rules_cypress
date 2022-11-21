@@ -13,7 +13,7 @@ rules_cypress_dependencies()
 
 load("@aspect_bazel_lib//lib:repositories.bzl", "aspect_bazel_lib_dependencies")
 
-aspect_bazel_lib_dependencies()
+aspect_bazel_lib_dependencies(override_local_config_platform = True)
 
 load("@rules_nodejs//nodejs:repositories.bzl", "DEFAULT_NODE_VERSION", "nodejs_register_toolchains")
 

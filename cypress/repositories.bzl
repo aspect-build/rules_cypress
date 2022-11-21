@@ -86,7 +86,7 @@ def cypress_register_toolchains(name, platform_to_integrity_hash = {}, **kwargs)
         cypress_repositories(
             name = name + "_" + platform,
             platform = platform,
-            sha256 = platform_to_integrity_hash[platform],
+            sha256 = platform_to_integrity_hash.get(platform, None),
             **kwargs
         )
         native.register_toolchains("@%s_toolchains//:%s_toolchain" % (name, platform))
