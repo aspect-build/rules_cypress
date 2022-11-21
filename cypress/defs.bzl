@@ -12,8 +12,8 @@ _cypress_test = rule(
     toolchains = js_binary_lib.toolchains + ["@aspect_rules_cypress//cypress:toolchain_type"],
 )
 
-def cypress_cli_test(name, cypress = "//:node_modules/cypress", **kwargs):
-    """cypress_cli_test runs the cypress CLI with the cypress toolchain.
+def cypress_test(name, cypress = "//:node_modules/cypress", **kwargs):
+    """cypress_test runs the cypress CLI with the cypress toolchain.
 
     The environment is bootstrapped by first setting the environment variable `CYPRESS_RUN_BINARY` to the binary downloaded by the cypress toolchain. See https://docs.cypress.io/guides/references/advanced-installation#Run-binary
 
@@ -68,7 +68,7 @@ def cypress_module_test(name, runner, cypress = "//:node_modules/cypress", **kwa
     })
     ```
 
-    In most scenarios, it is easier to use cypress_cli_test. But in some scenarios, you may need more flexibility:
+    In most scenarios, it is easier to use cypress_test. But in some scenarios, you may need more flexibility:
       - Accessing to the test results directly after the run and do something with them.
       - Reruning a failing spec file
       - Kicking off other builds or scripts

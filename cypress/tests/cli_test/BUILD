@@ -1,6 +1,6 @@
-load("@aspect_rules_cypress//cypress:defs.bzl", "cypress_cli_test")
+load("@aspect_rules_cypress//cypress:defs.bzl", "cypress_test")
 
-cypress_cli_test(
+cypress_test(
     name = "cli_test",
     args = [
         "run",
