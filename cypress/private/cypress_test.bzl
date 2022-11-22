@@ -8,6 +8,9 @@ def _impl(ctx):
 
     files = ctx.files.data[:] + cypress_files
 
+    if cypress_bin.startswith("external/"):
+        cypress_bin = cypress_bin.replace("external/", "../", 1)
+
     if ctx.attr.chdir:
         cypress_bin = "/".join([".." for _ in ctx.attr.chdir.split("/")] + [cypress_bin])
 
