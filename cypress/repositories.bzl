@@ -33,10 +33,18 @@ load("@aspect_rules_cypress//cypress:toolchain.bzl", "cypress_toolchain")
 
 filegroup(
     name = "files",
-    srcs = select({
-        "@bazel_tools//src/conditions:darwin": ["Cypress.app"],
-        "//conditions:default": ["Cypress"],
-    }) + ["binary_state.json"],
+    # TODO(mrmeku): For some reason, using a directory is incompatible with RBE
+    # as the directory does not appear within the runfiles tree. Debug what is
+    # happening here and remove the glob below.
+    # srcs = select({
+    #     "@bazel_tools//src/conditions:darwin": ["Cypress.app"],
+    #     "//conditions:default": ["Cypress"],
+    # }) + ["binary_state.json"],
+    srcs = glob(
+        ["**"],
+        # Exclude files with spaces since these are invalid bazel targets
+        exclude = ["**/* *"]
+    ),
     visibility = ["//visibility:public"],
 )
 
