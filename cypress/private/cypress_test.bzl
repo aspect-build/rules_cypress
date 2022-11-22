@@ -1,12 +1,29 @@
 load("@aspect_rules_js//js:libs.bzl", "js_binary_lib", "js_lib_helpers")
+load("@bazel_skylib//lib:dicts.bzl", "dicts")
 
-_attrs = js_binary_lib.attrs
+_attrs = dicts.add(js_binary_lib.attrs, {
+    "browsers": attr.label_list(
+        doc = """A sequence of labels specifying the browsers to include.
 
+Usually, any dependency that you wish to be included in the runfiles tree should
+be included within the data attribute. However, data dependencies, by default,
+are copied to the Bazel output tree before being passed as inputs to runfiles.
+
+This is not a good default behavior for browser since these typically come from
+external workspaces which cannot be symlinked into bazel-bin. Instead, we
+place them at the root of the runfiles tree. Use relative paths to construct
+account for this placement
+
+  e.g. ../../../BROWSER_WORKSPACE_NAME
+""",
+        allow_files = True,
+    ),
+})
 def _impl(ctx):
     cypress_bin = ctx.toolchains["@aspect_rules_cypress//cypress:toolchain_type"].cypressinfo.target_tool_path
     cypress_files = ctx.toolchains["@aspect_rules_cypress//cypress:toolchain_type"].cypressinfo.tool_files
 
-    files = ctx.files.data[:] + cypress_files
+    files = ctx.files.data[:] + cypress_files + ctx.files.browsers
 
     if cypress_bin.startswith("external/"):
         cypress_bin = cypress_bin.replace("external/", "../", 1)

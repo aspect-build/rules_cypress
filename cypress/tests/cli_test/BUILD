@@ -5,6 +5,7 @@ cypress_test(
     args = [
         "run",
         "--config-file=cypress.config.js",
+        "--browser=../../../../chrome/chrome"
     ],
     cypress = "//cypress/tests:node_modules/cypress",
     data = [
@@ -12,4 +13,7 @@ cypress_test(
         "cypress.config.js",
         "@aspect_rules_cypress//cypress/tests:node_modules",
     ],
+    browsers = [
+        "@chrome//:all"
+    ]
 )
