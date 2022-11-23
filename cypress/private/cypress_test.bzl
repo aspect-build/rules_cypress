@@ -19,14 +19,19 @@ account for this placement
         allow_files = True,
     ),
 })
+
+# Do the opposite of _to_manifest_path in
+# https://github.com/bazelbuild/rules_nodejs/blob/8b5d27400db51e7027fe95ae413eeabea4856f8e/nodejs/toolchain.bzl#L50
+# to get back to the short_path.
+# TODO: fix toolchain so we don't have to do this
+def _target_tool_short_path(path):
+    return ("../" + path[len("external/"):]) if path.startswith("external/") else path
+
 def _impl(ctx):
-    cypress_bin = ctx.toolchains["@aspect_rules_cypress//cypress:toolchain_type"].cypressinfo.target_tool_path
+    cypress_bin = _target_tool_short_path(ctx.toolchains["@aspect_rules_cypress//cypress:toolchain_type"].cypressinfo.target_tool_path)
     cypress_files = ctx.toolchains["@aspect_rules_cypress//cypress:toolchain_type"].cypressinfo.tool_files
 
     files = ctx.files.data[:] + cypress_files + ctx.files.browsers
-
-    if cypress_bin.startswith("external/"):
-        cypress_bin = cypress_bin.replace("external/", "../", 1)
 
     if ctx.attr.chdir:
         cypress_bin = "/".join([".." for _ in ctx.attr.chdir.split("/")] + [cypress_bin])

@@ -28,7 +28,7 @@ def _cypress_toolchain_impl(ctx):
     target_tool_path = ctx.attr.target_tool_path
 
     if ctx.attr.target_tool:
-        tool_files = ctx.attr.target_tool_files.files.to_list() + ctx.attr.target_tool.files.to_list()
+        tool_files = ctx.attr.target_tool_files.files.to_list()
         target_tool_path = _to_manifest_path(ctx, ctx.attr.target_tool.files.to_list()[0])
 
     # Make the $(tool_BIN) variable available in places like genrules.

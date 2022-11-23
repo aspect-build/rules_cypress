@@ -48,11 +48,11 @@ def rules_cypress_internal_deps():
     #
     # LASTCHANGE_URL="https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2FLAST_CHANGE?alt=media"
     # CHROME_REVISION=$(curl -s -S $LASTCHANGE_URL)
-    # echo "latest CHROME_REVISION is $CHROME_REVISION"
-    CHROME_REVISION = "1072361"
+    # echo "latest CHROME_REVISION_LINUX is $CHROME_REVISION"
+    CHROME_REVISION_LINUX = "1072361"
 
     http_archive(
-        name = "chrome",
+        name = "chrome_linux",
         build_file_content = """filegroup(
     name = "all",
     srcs = glob(["**"]),
@@ -61,6 +61,6 @@ def rules_cypress_internal_deps():
         sha256 = "0df22f743facd1e090eff9b7f8d8bdc293fb4dc31ce9156d2ef19b515974a72b",
         strip_prefix = "chrome-linux",
         urls = [
-            "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F" + CHROME_REVISION + "%2Fchrome-linux.zip?alt=media",
+            "https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Linux_x64%2F" + CHROME_REVISION_LINUX + "%2Fchrome-linux.zip?alt=media",
         ],
     )
