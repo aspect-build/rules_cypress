@@ -1,3 +1,8 @@
+"""Starlark helper to fetch rules_cypress dependencies.
+
+Should be replaced by bzlmod for users of Bazel 6.0 and above.
+"""
+
 load("@bazel_tools//tools/build_defs/repo:http.bzl", _http_archive = "http_archive")
 load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
 
@@ -22,9 +27,9 @@ def rules_cypress_dependencies():
 
     http_archive(
         name = "aspect_rules_js",
-        sha256 = "d8feeb67bca55cc56fb4696cf6c852f4a44c0c8dbe99ea108f6a95fd322b4bcb",
-        strip_prefix = "rules_js-1.7.0",
-        url = "https://github.com/aspect-build/rules_js/archive/refs/tags/v1.7.0.tar.gz",
+        sha256 = "f58d7be1bb0e4b7edb7a0085f969900345f5914e4e647b4f0d2650d5252aa87d",
+        strip_prefix = "rules_js-1.8.0",
+        url = "https://github.com/aspect-build/rules_js/archive/refs/tags/v1.8.0.tar.gz",
     )
 
     http_archive(
