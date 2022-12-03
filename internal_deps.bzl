@@ -39,7 +39,7 @@ def rules_cypress_internal_deps():
 
     http_archive(
         name = "aspect_bazel_lib",
-        sha256 = "695d319362b227725e4daa60d863b4d1969b167889902511f1fd3051cea1071f",
-        strip_prefix = "bazel-lib-1.16.3",
-        url = "https://github.com/aspect-build/bazel-lib/archive/refs/tags/v1.16.3.tar.gz",
+        sha256 = "be236556c7b9c7b91cb370e837fdcec62b6e8893408cd4465ae883c9d7c67024",
+        strip_prefix = "bazel-lib-1.18.0",
+        url = "https://github.com/aspect-build/bazel-lib/archive/refs/tags/v1.18.0.tar.gz",
     )
