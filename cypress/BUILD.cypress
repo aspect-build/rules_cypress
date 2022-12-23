@@ -1,0 +1,35 @@
+# BUILD file inserted into the cypress toolchain repository
+
+load("@aspect_rules_cypress//cypress:toolchain.bzl", "cypress_toolchain")
+load("@aspect_bazel_lib//lib:copy_directory.bzl", "copy_directory")
+
+# Copy the cypress binary directory to make it RBE compatible.
+copy_directory(
+    name = "cypress_binary",
+    src = select({
+        "@bazel_tools//src/conditions:darwin": "Cypress.app",
+        "//conditions:default": "Cypress",
+    }),
+    out = select({
+        "@bazel_tools//src/conditions:darwin": "Cypress.app",
+        "//conditions:default": "Cypress",
+    }),
+)
+
+filegroup(
+    name = "files",
+    srcs = [
+        ":cypress_binary",
+        "binary_state.json",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+cypress_toolchain(
+    name = "cypress_toolchain", 
+    target_tool = select({
+        "@bazel_tools//src/conditions:darwin": "Cypress.app/Contents/MacOS/Cypress",
+        "//conditions:default": "Cypress/Cypress",
+    }),
+    target_tool_files = ":files",
+)
