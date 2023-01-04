@@ -19,13 +19,13 @@ def rules_cypress_dependencies():
 
     http_archive(
         name = "aspect_rules_js",
-        sha256 = "f58d7be1bb0e4b7edb7a0085f969900345f5914e4e647b4f0d2650d5252aa87d",
-        strip_prefix = "rules_js-1.8.0",
-        url = "https://github.com/aspect-build/rules_js/archive/refs/tags/v1.8.0.tar.gz",
+        sha256 = "66ecc9f56300dd63fb86f11cfa1e8affcaa42d5300e2746dba08541916e913fd",
+        strip_prefix = "rules_js-1.13.0",
+        url = "https://github.com/aspect-build/rules_js/archive/refs/tags/v1.13.0.tar.gz",
     )
 
     http_archive(
         name = "rules_nodejs",
-        sha256 = "50adf0b0ff6fc77d6909a790df02eefbbb3bc2b154ece3406361dda49607a7bd",
-        urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/5.7.1/rules_nodejs-core-5.7.1.tar.gz"],
+        sha256 = "08337d4fffc78f7fe648a93be12ea2fc4e8eb9795a4e6aa48595b66b34555626",
+        urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/5.8.0/rules_nodejs-core-5.8.0.tar.gz"],
     )
