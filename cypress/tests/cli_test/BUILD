@@ -4,7 +4,7 @@ cypress_test(
     name = "cli_test",
     args = [
         "run",
-        "--config-file=cypress.config.js",
+        "--config-file=cypress.config.ts",
     ] + select({
         "@bazel_tools//src/conditions:darwin": [],
         "//conditions:default": ["--browser=../../../../chrome_linux/chrome"],
@@ -17,8 +17,9 @@ cypress_test(
     }),
     cypress = "//cypress/tests:node_modules/cypress",
     data = [
-        "cli_test.cy.js",
-        "cypress.config.js",
+        "cli_test.cy.ts",
+        "cypress.config.ts",
+        "tsconfig.json",
         "@aspect_rules_cypress//cypress/tests:node_modules",
     ],
 )

@@ -91,5 +91,6 @@ def cypress_module_test(name, runner, cypress = "//:node_modules/cypress", **kwa
         data = kwargs.pop("data", []) + [
             cypress,
         ],
+        patch_node_fs = kwargs.pop("patch_node_fs", False),
         **kwargs
     )
