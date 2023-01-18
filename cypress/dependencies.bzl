@@ -19,9 +19,9 @@ def rules_cypress_dependencies():
 
     http_archive(
         name = "aspect_rules_js",
-        sha256 = "66ecc9f56300dd63fb86f11cfa1e8affcaa42d5300e2746dba08541916e913fd",
-        strip_prefix = "rules_js-1.13.0",
-        url = "https://github.com/aspect-build/rules_js/archive/refs/tags/v1.13.0.tar.gz",
+        sha256 = "928ba25fa82cfe7983f89118677413dc74dbc5d0360fa969da07ff22a9306052",
+        strip_prefix = "rules_js-1.15.1",
+        url = "https://github.com/aspect-build/rules_js/archive/refs/tags/v1.15.1.tar.gz",
     )
 
     http_archive(
