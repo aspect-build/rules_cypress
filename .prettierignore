@@ -1,1 +1,2 @@
 docs/*.md
+cypress/tests/pnpm-lock.yaml

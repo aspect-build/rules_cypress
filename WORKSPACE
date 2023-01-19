@@ -26,13 +26,7 @@ load("@aspect_rules_cypress//cypress:repositories.bzl", "cypress_register_toolch
 
 cypress_register_toolchains(
     name = "cypress",
-    cypress_version = "10.8.0",
-    platform_to_integrity_hash = {
-        "darwin-x64": "17dc620ec7e2cb06a205fd1a8a831b3b48ff8223fd5761af257152661d1d9baf",
-        "darwin-arm64": "013cced7e5c1082d22346139e94be33f0ce84483843f038c464df4afa74743f9",
-        "linux-x64": "8cf4a7665b54f2eb5f36ac461841c67152d7f0015c21dda3b9867bf0bc625afd",
-        "linux-arm64": "a1521b1be05fdf3a0f0c008f759789a3d037f3123a1a6ad0f3c0a37308bf4901",
-    },
+    cypress_version = "12.3.0",
 )
 
 # For running our own unit tests
