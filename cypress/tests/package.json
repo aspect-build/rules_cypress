@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "description": "Tests for cypress bazel rules",
   "dependencies": {
-    "cypress": "^10.8.0"
+    "cypress": "12.3.0"
   }
 }

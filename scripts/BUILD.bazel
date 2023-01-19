@@ -1,0 +1,4 @@
+sh_binary(
+    name = "mirror_releases",
+    srcs = ["mirror_releases.sh"],
+)
