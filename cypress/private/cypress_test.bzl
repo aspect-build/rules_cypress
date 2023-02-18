@@ -43,6 +43,7 @@ def _impl(ctx):
         fixed_env = {
             "CYPRESS_RUN_BINARY": cypress_bin,
             "HOME": "$$TEST_TMPDIR",
+            "XDG_CONFIG_HOME": "$$TEST_TMPDIR",
         },
     )
 
