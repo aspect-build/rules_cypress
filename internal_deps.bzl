@@ -21,27 +21,16 @@ def rules_cypress_internal_deps():
         urls = ["https://github.com/bazelbuild/bazel-gazelle/releases/download/v0.28.0/bazel-gazelle-v0.28.0.tar.gz"],
     )
 
-    # Override bazel_skylib distribution to fetch sources instead
-    # so that the gazelle extension is included
-    # see https://github.com/bazelbuild/bazel-skylib/issues/250
     http_archive(
-        name = "bazel_skylib",
-        sha256 = "3b620033ca48fcd6f5ef2ac85e0f6ec5639605fa2f627968490e52fc91a9932f",
-        strip_prefix = "bazel-skylib-1.3.0",
-        urls = ["https://github.com/bazelbuild/bazel-skylib/archive/refs/tags/1.3.0.tar.gz"],
+        name = "bazel_skylib_gazelle_plugin",
+        sha256 = "0a466b61f331585f06ecdbbf2480b9edf70e067a53f261e0596acd573a7d2dc3",
+        urls = ["https://github.com/bazelbuild/bazel-skylib/releases/download/1.4.1/bazel-skylib-gazelle-plugin-1.4.1.tar.gz"],
     )
 
     http_archive(
         name = "io_bazel_stardoc",
         sha256 = "3fd8fec4ddec3c670bd810904e2e33170bedfe12f90adf943508184be458c8bb",
         urls = ["https://github.com/bazelbuild/stardoc/releases/download/0.5.3/stardoc-0.5.3.tar.gz"],
-    )
-
-    http_archive(
-        name = "aspect_bazel_lib",
-        sha256 = "b4cd1114874ab15f794134eefbc254eb89d3e1de640bf4a11f2f402e886ad29e",
-        strip_prefix = "bazel-lib-1.27.2",
-        url = "https://github.com/aspect-build/bazel-lib/releases/download/v1.27.2/bazel-lib-v1.27.2.tar.gz",
     )
 
     # To update CHROME_REVISION, use the below script
