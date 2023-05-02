@@ -7,7 +7,7 @@ See https://docs.bazel.build/versions/main/skylark/deploying.html#dependencies
 load("//cypress/private:toolchains_repo.bzl", "PLATFORMS", "toolchains_repo")
 load("//cypress/private:versions.bzl", "TOOL_VERSIONS")
 
-LATEST_VERSION = TOOL_VERSIONS.keys()[0]
+LATEST_CYPRESS_VERSION = TOOL_VERSIONS.keys()[0]
 
 ########
 # Remaining content of the file is only used to support toolchains.
