@@ -1,3 +1,5 @@
+"cypress_test rule."
+
 load("@aspect_rules_js//js:libs.bzl", "js_binary_lib", "js_lib_helpers")
 load("@bazel_skylib//lib:dicts.bzl", "dicts")
 
@@ -40,6 +42,7 @@ def _impl(ctx):
         ctx,
         log_prefix_rule_set = "aspect_rules_cypess",
         log_prefix_rule = "cypress_node_test",
+        fixed_args = ctx.attr.fixed_args,
         fixed_env = {
             "CYPRESS_RUN_BINARY": cypress_bin,
             "HOME": "$$TEST_TMPDIR",
