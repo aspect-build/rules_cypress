@@ -24,12 +24,13 @@ def _cypress_repo_impl(repository_ctx):
         repository_ctx.attr.version,
         repository_ctx.attr.platform,
     )
+
     repository_ctx.download_and_extract(
         url = url,
         sha256 = repository_ctx.attr.sha256,
     )
     binary_state_json_contents = '{"verified": true}'
-    repository_ctx.file("binary_state.json", binary_state_json_contents)
+    repository_ctx.file("binary_state_temp.json", binary_state_json_contents)
 
     # Base BUILD file for this repository
     repository_ctx.template("BUILD.bazel", Label("//cypress:BUILD.cypress"))
