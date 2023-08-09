@@ -24,7 +24,6 @@ def _cypress_repo_impl(repository_ctx):
         repository_ctx.attr.version,
         repository_ctx.attr.platform,
     )
-
     repository_ctx.download_and_extract(
         url = url,
         sha256 = repository_ctx.attr.sha256,
