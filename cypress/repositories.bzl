@@ -29,7 +29,7 @@ def _cypress_repo_impl(repository_ctx):
         sha256 = repository_ctx.attr.sha256,
     )
     binary_state_json_contents = '{"verified": true}'
-    repository_ctx.file("binary_state_temp.json", binary_state_json_contents)
+    repository_ctx.file("binary_state.json", binary_state_json_contents)
 
     # Base BUILD file for this repository
     repository_ctx.template("BUILD.bazel", Label("//cypress:BUILD.cypress"))
