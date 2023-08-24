@@ -2,6 +2,8 @@
 
 load("@aspect_rules_cypress//cypress:toolchain.bzl", "cypress_toolchain")
 load("@aspect_bazel_lib//lib:copy_directory.bzl", "copy_directory")
+load("@aspect_bazel_lib//lib:copy_to_bin.bzl", "copy_to_bin")
+
 
 # Copy the cypress binary directory to make it RBE compatible.
 copy_directory(
@@ -16,11 +18,16 @@ copy_directory(
     }),
 )
 
+copy_to_bin(
+    name = "binary_state_file",
+    srcs = ["binary_state.json"]
+)
+
 filegroup(
     name = "files",
     srcs = [
         ":cypress_binary",
-        "binary_state.json",
+        ":binary_state_file",
     ],
     visibility = ["//visibility:public"],
 )
