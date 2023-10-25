@@ -16,19 +16,21 @@ copy_directory(
         "@bazel_tools//src/conditions:darwin": "Cypress.app",
         "//conditions:default": "Cypress",
     }),
+    tags = ["manual"]
 )
 
 copy_to_bin(
     name = "binary_state_file",
-    srcs = ["binary_state.json"]
+    srcs = ["binary_state.json"],
+    tags = ["manual"]
 )
 
 filegroup(
     name = "files",
-    srcs = [
-        ":cypress_binary",
-        ":binary_state_file",
-    ],
+    srcs = select({
+        "@bazel_tools//src/conditions:darwin": ["Cypress.app", "binary_state.json"],
+        "//conditions:default": [":cypress_binary", ":binary_state_file"]
+    }),
     visibility = ["//visibility:public"],
 )
 
