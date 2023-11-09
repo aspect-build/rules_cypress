@@ -22,11 +22,11 @@ nodejs_register_toolchains(
     node_version = DEFAULT_NODE_VERSION,
 )
 
-load("@aspect_rules_cypress//cypress:repositories.bzl", "cypress_register_toolchains")
+load("@aspect_rules_cypress//cypress:repositories.bzl", "LATEST_CYPRESS_VERSION", "cypress_register_toolchains")
 
 cypress_register_toolchains(
     name = "cypress",
-    cypress_version = "12.3.0",
+    cypress_version = LATEST_CYPRESS_VERSION,
 )
 
 # For running our own unit tests
