@@ -1,9 +1,0 @@
-{
-  "name": "tests",
-  "version": "1.0.0",
-  "description": "Tests for cypress bazel rules",
-  "dependencies": {
-    "cypress": "12.12.0",
-    "typescript": "4.9.5"
-  }
-}
