@@ -3,3 +3,4 @@ bazel-*
 .idea/
 .ijwb/
 node_modules
+MODULE.bazel.lock
