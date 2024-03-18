@@ -1,17 +1,3 @@
-"""Provides a simple way to test your rules as an external workspace.
-Add a basic smoke-test target below.
-"""
+load("@npm//:defs.bzl", "npm_link_all_packages")
 
-load("@bazel_skylib//rules:build_test.bzl", "build_test")
-# load("aspect_rules_cypress//cypress:defs.bzl", "...")
-
-# Replace with a usage of your rule/macro
-filegroup(name = "empty")
-
-build_test(
-    name = "smoke_test",
-    targets = [
-        # targets you add above
-        ":empty",
-    ],
-)
+npm_link_all_packages(name = "node_modules")
