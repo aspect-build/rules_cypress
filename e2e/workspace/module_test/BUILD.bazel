@@ -2,7 +2,6 @@ load("@aspect_rules_cypress//cypress:defs.bzl", "cypress_module_test")
 
 cypress_module_test(
     name = "module_test",
-    cypress = "@aspect_rules_cypress//cypress/tests:node_modules",
     data = [
         "cypress.config.js",
         "module_test.cy.js",

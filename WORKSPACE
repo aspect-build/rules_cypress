@@ -34,18 +34,6 @@ load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
 
 bazel_skylib_workspace()
 
-load("@aspect_rules_js//npm:npm_import.bzl", "npm_translate_lock")
-
-npm_translate_lock(
-    name = "npm",
-    pnpm_lock = "@aspect_rules_cypress//cypress/tests:pnpm-lock.yaml",
-    verify_node_modules_ignored = "@aspect_rules_cypress//:.bazelignore",
-)
-
-load("@npm//:repositories.bzl", "npm_repositories")
-
-npm_repositories()
-
 # Buildifier
 load("@buildifier_prebuilt//:deps.bzl", "buildifier_prebuilt_deps")
 
