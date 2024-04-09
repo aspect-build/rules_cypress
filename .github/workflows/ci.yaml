@@ -30,8 +30,6 @@ jobs:
       - uses: actions/checkout@v4
       - id: bazel_6
         run: echo "bazelversion=$(head -n 1 .bazelversion)" >> $GITHUB_OUTPUT
-      - id: bazel_5
-        run: echo "bazelversion=5.3.2" >> $GITHUB_OUTPUT
     outputs:
       # Will look like ["<version from .bazelversion>", "5.3.2"]
       bazelversions: ${{ toJSON(steps.*.outputs.bazelversion) }}
