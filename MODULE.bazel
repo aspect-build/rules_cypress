@@ -14,10 +14,6 @@ register_toolchains("@cypress_toolchains//:all")
 
 bazel_dep(name = "platforms", version = "0.0.5")
 bazel_dep(name = "aspect_rules_js", version = "1.38.0")
-
-####### Node.js version #########
-# By default you get the node version from DEFAULT_NODE_VERSION in @rules_nodejs//nodejs:repositories.bzl
-# Optionally you can pin a different node version:
 bazel_dep(name = "rules_nodejs", version = "5.8.2")
 
 node = use_extension("@rules_nodejs//nodejs:extensions.bzl", "node")
