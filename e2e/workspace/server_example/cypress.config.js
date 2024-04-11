@@ -1,3 +1,4 @@
+// https://docs.cypress.io/guides/references/configuration
 const { defineConfig } = require("cypress");
 const { spawn } = require("node:child_process");
 const { join } = require("path");
