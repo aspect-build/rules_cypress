@@ -1,0 +1,22 @@
+load("@aspect_rules_cypress//cypress:defs.bzl", "cypress_test")
+load("@aspect_rules_js//js:defs.bzl", "js_binary")
+
+js_binary(
+    name = "server",
+    data = ["//:node_modules/express"],
+    entry_point = "server.js",
+)
+
+cypress_test(
+    name = "server_example",
+    args = [
+        "run",
+        "--config-file=cypress.config.js",
+    ],
+    data = [
+        "cypress.config.js",
+        "server_example_test.cy.js",
+        ":server",
+        "//:node_modules",
+    ],
+)
