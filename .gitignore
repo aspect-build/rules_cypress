@@ -3,3 +3,5 @@ bazel-*
 .idea/
 .ijwb/
 node_modules
+MODULE.bazel.lock
+e2e/workspace/MODULE.bazel.lock
