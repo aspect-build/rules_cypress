@@ -20,10 +20,18 @@ module.exports = defineConfig({
       const port = "3000";
       return new Promise((resolve, reject) => {
         // Launch the server
-        const serverProcess = spawn(join(process.cwd(), "server.sh"), [port], {
-          // js_binary expects to be run at execroot, but cypress rule has changed pwd to where our test target was defined.
-          cwd: `${process.env.TEST_SRCDIR}/${process.env.TEST_WORKSPACE}`,
-        });
+        const workspaceRoot = join(
+          process.env.RUNFILES_DIR,
+          process.env.TEST_WORKSPACE,
+        );
+        const serverProcess = spawn(
+          join(workspaceRoot, "server_example/server_/server"),
+          [port],
+          {
+            // js_binary expects to be run at execroot, but cypress rule has changed pwd to where our test target was defined.
+            cwd: workspaceRoot,
+          },
+        );
 
         serverProcess.stdout.on("data", (data) => {
           data = data.toString();
