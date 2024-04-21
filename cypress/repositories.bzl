@@ -41,7 +41,7 @@ cypress_repositories = repository_rule(
 )
 
 # Wrapper macro around everything above, this is the primary API
-def cypress_register_toolchains(name, cypress_version = None, cypress_integrity = None, register = True):
+def cypress_register_toolchains(name, cypress_version = None, cypress_integrity = None):
     """
     Convenience macro for setting up cypress toolchain for all supported platforms.
 
@@ -64,9 +64,6 @@ def cypress_register_toolchains(name, cypress_version = None, cypress_integrity 
             Alternatively, download a binary manually to compute its integrity hash, see https://docs.cypress.io/guides/references/advanced-installation#Download-URLs
 
             Once downloaded, run `shasum -a 256` to get the integrity hash
-        register: Whether to call Bazel register_toolchains on the created toolchains.
-            Should be True when used from a WORKSPACE file, and False used from bzlmod
-            which has its own toolchain registration syntax.
     """
     if not cypress_integrity:
         if cypress_version not in TOOL_VERSIONS.keys():
@@ -84,8 +81,7 @@ Alternately, you may manually specify platform integrity hashes with cypress_int
             platform = platform,
             sha256 = cypress_integrity.get(platform, None),
         )
-        if register:
-            native.register_toolchains("@%s_toolchains//:%s_toolchain" % (name, platform))
+        native.register_toolchains("@%s_toolchains//:%s_toolchain" % (name, platform))
 
     toolchains_repo(
         name = name + "_toolchains",

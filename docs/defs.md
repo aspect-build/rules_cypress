@@ -22,7 +22,7 @@ const cypress = require('cypress')
 
 cypress.run({
 headless: true,
-}).then(result => {
+}).then(result =&gt; {
 if (result.status === 'failed') {
     process.exit(1);
 }
@@ -42,8 +42,8 @@ In most scenarios, it is easier to use cypress_test. But in some scenarios, you 
 | :------------- | :------------- | :------------- |
 | <a id="cypress_module_test-name"></a>name |  The name used for this rule and output files   |  none |
 | <a id="cypress_module_test-runner"></a>runner |  JS file to call into the cypress module api See https://docs.cypress.io/guides/guides/module-api   |  none |
-| <a id="cypress_module_test-cypress"></a>cypress |  The cypress npm package which was already linked using an API like npm_link_all_packages.   |  `"//:node_modules/cypress"` |
-| <a id="cypress_module_test-kwargs"></a>kwargs |  All other args from `js_test`. See https://github.com/aspect-build/rules_js/blob/main/docs/js_binary.md#js_test   |  none |
+| <a id="cypress_module_test-cypress"></a>cypress |  The cypress npm package which was already linked using an API like npm_link_all_packages.   |  <code>"//:node_modules/cypress"</code> |
+| <a id="cypress_module_test-kwargs"></a>kwargs |  All other args from <code>js_test</code>. See https://github.com/aspect-build/rules_js/blob/main/docs/js_binary.md#js_test   |  none |
 
 
 <a id="cypress_test"></a>
@@ -69,7 +69,7 @@ https://docs.cypress.io/guides/guides/command-line#What-you-ll-learn
 | Name  | Description | Default Value |
 | :------------- | :------------- | :------------- |
 | <a id="cypress_test-name"></a>name |  The name used for this rule and output files   |  none |
-| <a id="cypress_test-cypress"></a>cypress |  The cypress npm package which was already linked using an API like npm_link_all_packages.   |  `"//:node_modules/cypress"` |
-| <a id="cypress_test-kwargs"></a>kwargs |  All other args from `js_test`. See https://github.com/aspect-build/rules_js/blob/main/docs/js_binary.md#js_test   |  none |
+| <a id="cypress_test-cypress"></a>cypress |  The cypress npm package which was already linked using an API like npm_link_all_packages.   |  <code>"//:node_modules/cypress"</code> |
+| <a id="cypress_test-kwargs"></a>kwargs |  All other args from <code>js_test</code>. See https://github.com/aspect-build/rules_js/blob/main/docs/js_binary.md#js_test   |  none |
 
 
