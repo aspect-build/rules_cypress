@@ -15,14 +15,23 @@ local_repository(
 # Alternatively, you can skip calling this function, so long as you've
 # already fetched all the dependencies.
 load("@aspect_rules_cypress//cypress:dependencies.bzl", "rules_cypress_dependencies")
-load("@aspect_rules_cypress//cypress:repositories.bzl", "cypress_register_toolchains")
 
 rules_cypress_dependencies()
+
+load("@aspect_rules_cypress//cypress:repositories.bzl", "cypress_register_toolchains")
 
 cypress_register_toolchains(
     name = "cypress",
     cypress_version = "12.12.0",
 )
+
+load("@aspect_rules_js//js:repositories.bzl", "rules_js_dependencies")
+
+rules_js_dependencies()
+
+load("@bazel_features//:deps.bzl", "bazel_features_deps")
+
+bazel_features_deps()
 
 load("@rules_nodejs//nodejs:repositories.bzl", "DEFAULT_NODE_VERSION", "nodejs_register_toolchains")
 
