@@ -18,16 +18,16 @@ def rules_cypress_dependencies():
 
     http_archive(
         name = "aspect_bazel_lib",
-        sha256 = "e3151d87910f69cf1fc88755392d7c878034a69d6499b287bcfc00b1cf9bb415",
-        strip_prefix = "bazel-lib-1.32.1",
-        url = "https://github.com/aspect-build/bazel-lib/releases/download/v1.32.1/bazel-lib-v1.32.1.tar.gz",
+        sha256 = "d0529773764ac61184eb3ad3c687fb835df5bee01afedf07f0cf1a45515c96bc",
+        strip_prefix = "bazel-lib-1.42.3",
+        url = "https://github.com/aspect-build/bazel-lib/releases/download/v1.42.3/bazel-lib-v1.42.3.tar.gz",
     )
 
     http_archive(
         name = "aspect_rules_js",
-        sha256 = "7cb2d84b7d5220194627c9a0267ae599e357350e75ea4f28f337a25ca6219b83",
-        strip_prefix = "rules_js-1.29.2",
-        url = "https://github.com/aspect-build/rules_js/releases/download/v1.29.2/rules_js-v1.29.2.tar.gz",
+        sha256 = "bc9b4a01ef8eb050d8a7a050eedde8ffb1e45a56b0e4094e26f06c17d5fcf1d5",
+        strip_prefix = "rules_js-1.41.2",
+        url = "https://github.com/aspect-build/rules_js/releases/download/v1.41.2/rules_js-v1.41.2.tar.gz",
     )
 
     http_archive(

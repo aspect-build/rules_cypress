@@ -46,6 +46,7 @@ jobs:
       fail-fast: false
       matrix:
         bazelversion: ${{ fromJSON(needs.matrix-prep-bazelversion.outputs.bazelversions) }}
+        bzlmod: [1, 0]
         folder:
           - "."
           - "e2e/workspace"
@@ -87,4 +88,10 @@ jobs:
           # Bazelisk will download bazel to here, ensure it is cached between runs.
           XDG_CACHE_HOME: ~/.cache/bazel-repo
         working-directory: ${{ matrix.folder }}
-        run: bazel --bazelrc=$GITHUB_WORKSPACE/.github/workflows/ci.bazelrc --bazelrc=.bazelrc test //...
+        run: |
+          bazel \
+            --bazelrc=$GITHUB_WORKSPACE/.github/workflows/ci.bazelrc \
+            --bazelrc=.bazelrc \
+            test \
+            --enable_bzlmod=${{ matrix.bzlmod }} \
+            //...
