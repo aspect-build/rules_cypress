@@ -4,6 +4,12 @@ local_path_override(
     path = "../..",
 )
 
+cypress = use_extension("@aspect_rules_cypress//cypress:extensions.bzl", "cypress")
+cypress.toolchain(cypress_version = "12.3.0")
+use_repo(cypress, "cypress_toolchains")
+
+register_toolchains("@cypress_toolchains//:all")
+
 bazel_dep(name = "aspect_rules_js", version = "1.41.2", dev_dependency = True)
 bazel_dep(name = "bazel_features", version = "1.9.0", dev_dependency = True)
 
