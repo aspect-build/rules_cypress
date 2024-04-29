@@ -12,28 +12,10 @@ _cypress_test = rule(
     toolchains = js_binary_lib.toolchains + ["@aspect_rules_cypress//cypress:toolchain_type"],
 )
 
-def cypress_test(name, cypress = "//:node_modules/cypress", **kwargs):
-    """cypress_test runs the cypress CLI with the cypress toolchain.
-
-    The environment is bootstrapped by first setting the environment variable `CYPRESS_RUN_BINARY` to the binary downloaded by the cypress toolchain. See https://docs.cypress.io/guides/references/advanced-installation#Run-binary
-
-    See documentation on what arguments the cypress CLI supports:
-    https://docs.cypress.io/guides/guides/command-line#What-you-ll-learn
-
-
-    Args:
-        name: The name used for this rule and output files
-        cypress: The cypress npm package which was already linked using an API like npm_link_all_packages.
-        **kwargs: All other args from `js_test`. See https://github.com/aspect-build/rules_js/blob/main/docs/js_binary.md#js_test
-    """
-    entry_point = "%s__entry_point" % name
-    directory_path(
-        name = entry_point,
-        directory = cypress + "/dir",
-        path = "bin/cypress",
-        tags = ["manual"],
-    )
-
+def _cypress_test_macro(name, entry_point, cypress, **kwargs):
+    tags = kwargs.pop("tags", [])
+    if not kwargs.pop("allow_sandbox", False):
+        tags.append("no-sandbox")
     _cypress_test(
         name = name,
         entry_point = entry_point,
@@ -49,10 +31,79 @@ def cypress_test(name, cypress = "//:node_modules/cypress", **kwargs):
             "@aspect_rules_js//js/private:experimental_allow_unresolved_symlinks": True,
             "//conditions:default": False,
         }),
+        tags = tags,
         **kwargs
     )
 
-def cypress_module_test(name, runner, cypress = "//:node_modules/cypress", **kwargs):
+def cypress_test(
+        name,
+        cypress = "//:node_modules/cypress",
+        allow_sandbox = False,
+        browsers = [],
+        **kwargs):
+    """cypress_test runs the cypress CLI with the cypress toolchain.
+
+    The environment is bootstrapped by first setting the environment variable `CYPRESS_RUN_BINARY` to the binary downloaded by the cypress toolchain. See https://docs.cypress.io/guides/references/advanced-installation#Run-binary
+
+    See documentation on what arguments the cypress CLI supports:
+    https://docs.cypress.io/guides/guides/command-line#What-you-ll-learn
+
+
+    Args:
+        name: The name used for this rule and output files
+        cypress: The cypress npm package which was already linked using an API like npm_link_all_packages.
+        allow_sandbox: Turn off sandboxing by default to allow electron to perform write operations.
+            Cypress does not expose the underlying electron apis so we
+            cannot alter the user app data directory to be within the bazel
+            sandbox.
+
+            From https://www.electronjs.org/docs/latest/api/app
+            appData Per-user application data directory, which by default points to:
+                %APPDATA% on Windows
+                $XDG_CONFIG_HOME or ~/.config on Linux
+                ~/Library/Application Support on macOS
+
+            Cypress may fail to connect on macos with errors like:
+                Timed out waiting for the browser to connect. Retrying...
+                Timed out waiting for the browser to connect. Retrying again...
+                The browser never connected. Something is wrong. The tests cannot run. Aborting...
+        browsers: A sequence of labels specifying the browsers to include.
+            Usually, any dependency that you wish to be included in the runfiles tree should
+            be included within the data attribute. However, data dependencies, by default,
+            are copied to the Bazel output tree before being passed as inputs to runfiles.
+
+            This is not a good default behavior for browser since these typically come from
+            external workspaces which cannot be symlinked into bazel-bin. Instead, we
+            place them at the root of the runfiles tree. Use relative paths to construct
+            account for this placement
+
+            e.g. ../../../BROWSER_WORKSPACE_NAME
+        **kwargs: All other args from `js_test`. See https://github.com/aspect-build/rules_js/blob/main/docs/js_binary.md#js_test
+    """
+    entry_point = "%s__entry_point" % name
+    directory_path(
+        name = entry_point,
+        directory = cypress + "/dir",
+        path = "bin/cypress",
+        tags = ["manual"],
+    )
+
+    _cypress_test_macro(
+        name = name,
+        entry_point = entry_point,
+        cypress = cypress,
+        allow_sandbox = allow_sandbox,
+        browsers = browsers,
+        **kwargs
+    )
+
+def cypress_module_test(
+        name,
+        runner,
+        cypress = "//:node_modules/cypress",
+        allow_sandbox = False,
+        browsers = [],
+        **kwargs):
     """cypress_module_test creates a node environment which is hooked up to the cypress toolchain.
 
     The environment is bootstrapped by first setting the environment variable `CYPRESS_RUN_BINARY` to the binary downloaded by the cypress toolchain. See https://docs.cypress.io/guides/references/advanced-installation#Run-binary
@@ -82,23 +133,39 @@ def cypress_module_test(name, runner, cypress = "//:node_modules/cypress", **kwa
         runner: JS file to call into the cypress module api
             See https://docs.cypress.io/guides/guides/module-api
         cypress: The cypress npm package which was already linked using an API like npm_link_all_packages.
+        allow_sandbox: Turn off sandboxing by default to allow electron to perform write operations.
+            Cypress does not expose the underlying electron apis so we
+            cannot alter the user app data directory to be within the bazel
+            sandbox.
+
+            From https://www.electronjs.org/docs/latest/api/app
+            appData Per-user application data directory, which by default points to:
+                %APPDATA% on Windows
+                $XDG_CONFIG_HOME or ~/.config on Linux
+                ~/Library/Application Support on macOS
+
+            Cypress may fail to connect on macos with errors like:
+                Timed out waiting for the browser to connect. Retrying...
+                Timed out waiting for the browser to connect. Retrying again...
+                The browser never connected. Something is wrong. The tests cannot run. Aborting...
+        browsers: A sequence of labels specifying the browsers to include.
+            Usually, any dependency that you wish to be included in the runfiles tree should
+            be included within the data attribute. However, data dependencies, by default,
+            are copied to the Bazel output tree before being passed as inputs to runfiles.
+
+            This is not a good default behavior for browser since these typically come from
+            external workspaces which cannot be symlinked into bazel-bin. Instead, we
+            place them at the root of the runfiles tree. Use relative paths to construct
+            account for this placement
+
+            e.g. ../../../BROWSER_WORKSPACE_NAME
         **kwargs: All other args from `js_test`. See https://github.com/aspect-build/rules_js/blob/main/docs/js_binary.md#js_test
     """
-    _cypress_test(
+    _cypress_test_macro(
         name = name,
-        enable_runfiles = select({
-            "@aspect_rules_js//js/private:enable_runfiles": True,
-            "//conditions:default": False,
-        }),
-        unresolved_symlinks_enabled = select({
-            "@aspect_rules_js//js/private:experimental_allow_unresolved_symlinks": True,
-            "//conditions:default": False,
-        }),
         entry_point = runner,
-        chdir = native.package_name(),
-        data = kwargs.pop("data", []) + [
-            cypress,
-        ],
-        patch_node_fs = kwargs.pop("patch_node_fs", False),
+        cypress = cypress,
+        allow_sandbox = allow_sandbox,
+        browsers = browsers,
         **kwargs
     )
