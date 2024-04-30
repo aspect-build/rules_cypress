@@ -34,6 +34,7 @@ def _impl(ctx):
             "CYPRESS_RUN_BINARY": cypress_bin,
             "HOME": "$$TEST_TMPDIR",
             "XDG_CONFIG_HOME": "$$TEST_TMPDIR",
+            "DISPLAY": "0",
         },
     )
 
