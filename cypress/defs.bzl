@@ -12,9 +12,9 @@ _cypress_test = rule(
     toolchains = js_binary_lib.toolchains + ["@aspect_rules_cypress//cypress:toolchain_type"],
 )
 
-def _cypress_test_macro(name, entry_point, cypress, **kwargs):
+def _cypress_test_macro(name, entry_point, cypress, disable_sandbox, **kwargs):
     tags = kwargs.pop("tags", [])
-    if not kwargs.pop("allow_sandbox", False):
+    if disable_sandbox:
         tags.append("no-sandbox")
     _cypress_test(
         name = name,
@@ -38,7 +38,7 @@ def _cypress_test_macro(name, entry_point, cypress, **kwargs):
 def cypress_test(
         name,
         cypress = "//:node_modules/cypress",
-        allow_sandbox = False,
+        disable_sandbox = True,
         browsers = [],
         **kwargs):
     """cypress_test runs the cypress CLI with the cypress toolchain.
@@ -52,7 +52,7 @@ def cypress_test(
     Args:
         name: The name used for this rule and output files
         cypress: The cypress npm package which was already linked using an API like npm_link_all_packages.
-        allow_sandbox: Turn off sandboxing by default to allow electron to perform write operations.
+        disable_sandbox: Turn off sandboxing by default to allow electron to perform write operations.
             Cypress does not expose the underlying electron apis so we
             cannot alter the user app data directory to be within the bazel
             sandbox.
@@ -92,7 +92,7 @@ def cypress_test(
         name = name,
         entry_point = entry_point,
         cypress = cypress,
-        allow_sandbox = allow_sandbox,
+        disable_sandbox = disable_sandbox,
         browsers = browsers,
         **kwargs
     )
@@ -101,7 +101,7 @@ def cypress_module_test(
         name,
         runner,
         cypress = "//:node_modules/cypress",
-        allow_sandbox = False,
+        disable_sandbox = True,
         browsers = [],
         **kwargs):
     """cypress_module_test creates a node environment which is hooked up to the cypress toolchain.
@@ -133,7 +133,7 @@ def cypress_module_test(
         runner: JS file to call into the cypress module api
             See https://docs.cypress.io/guides/guides/module-api
         cypress: The cypress npm package which was already linked using an API like npm_link_all_packages.
-        allow_sandbox: Turn off sandboxing by default to allow electron to perform write operations.
+        disable_sandbox: Turn off sandboxing by default to allow electron to perform write operations.
             Cypress does not expose the underlying electron apis so we
             cannot alter the user app data directory to be within the bazel
             sandbox.
@@ -165,7 +165,7 @@ def cypress_module_test(
         name = name,
         entry_point = runner,
         cypress = cypress,
-        allow_sandbox = allow_sandbox,
+        disable_sandbox = disable_sandbox,
         browsers = browsers,
         **kwargs
     )
