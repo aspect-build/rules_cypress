@@ -4,9 +4,6 @@ load("@aspect_rules_js//js:libs.bzl", "js_binary_lib", "js_lib_helpers")
 load("@bazel_skylib//lib:dicts.bzl", "dicts")
 
 _attrs = dicts.add(js_binary_lib.attrs, {
-    "allow_sandbox": attr.bool(
-        default = False,
-    ),
     "browsers": attr.label_list(
         allow_files = True,
     ),
