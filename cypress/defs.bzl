@@ -112,15 +112,25 @@ def cypress_module_test(
 
     Example `runner.js`:
     ```
-    const cypress = require('cypress')
+    async function main() {
+    const result = await cypress.run({
+        headless: true,
+    });
 
-    cypress.run({
-    headless: true,
-    }).then(result => {
-    if (result.status === 'failed') {
-        process.exit(1);
+    // If any tests have failed, results.failures is non-zero, some tests have failed
+    if (result.failures) {
+        console.error("One or more cypress tests have failed");
+        console.error(result.message);
+        return 1;
     }
-    })
+
+    if (result.status === "failed") {
+        console.log("Cypress exited with a failure status");
+        return 2;
+    }
+
+    return 0;
+    }
     ```
 
     In most scenarios, it is easier to use cypress_test. But in some scenarios, you may need more flexibility:

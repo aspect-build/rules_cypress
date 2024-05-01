@@ -3,6 +3,7 @@ bazel-*
 .idea/
 .ijwb/
 node_modules
+.github/pull_request_template.md
 
 # Don't commit lockfile for now as it is unstable. Do allow for it to be
 # created, however, since it gives a performance boost for local development.
