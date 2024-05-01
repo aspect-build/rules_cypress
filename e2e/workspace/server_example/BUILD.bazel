@@ -9,6 +9,7 @@ js_binary(
 
 cypress_test(
     name = "server_example",
+    timeout = "short",
     args = [
         "run",
         "--config-file=cypress.config.js",

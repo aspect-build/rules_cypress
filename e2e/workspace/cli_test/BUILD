@@ -2,6 +2,7 @@ load("@aspect_rules_cypress//cypress:defs.bzl", "cypress_test")
 
 cypress_test(
     name = "cli_test",
+    timeout = "short",
     args = [
         "run",
         "--config-file=cypress.config.ts",

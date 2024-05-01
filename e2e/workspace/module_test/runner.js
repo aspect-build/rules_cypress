@@ -12,8 +12,8 @@ async function main() {
     return 1;
   }
 
-  if (result.status !== "finished") {
-    console.error("Cypress tests failed with status", result.status);
+  if (result.status === "failed") {
+    console.log("Cypress exited with a failure status");
     return 2;
   }
 

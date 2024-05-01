@@ -5,7 +5,7 @@ local_path_override(
 )
 
 cypress = use_extension("@aspect_rules_cypress//cypress:extensions.bzl", "cypress", dev_dependency = True)
-cypress.toolchain(cypress_version = "12.12.0")
+cypress.toolchain(cypress_version = "13.6.6")
 use_repo(cypress, "cypress_toolchains")
 
 register_toolchains("@cypress_toolchains//:all")
@@ -16,6 +16,10 @@ bazel_dep(name = "bazel_features", version = "1.9.0", dev_dependency = True)
 npm = use_extension("@aspect_rules_js//npm:extensions.bzl", "npm", dev_dependency = True)
 npm.npm_translate_lock(
     name = "npm",
+    lifecycle_hooks_exclude = [
+        # Speed up installation by disabling cypress binary install. Optional.
+        "cypress",
+    ],
     npmrc = "//:.npmrc",
     pnpm_lock = "//:pnpm-lock.yaml",
     verify_node_modules_ignored = "//:.bazelignore",
