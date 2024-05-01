@@ -1,5 +1,6 @@
 load("@bazel_skylib//:bzl_library.bzl", "bzl_library")
 load("@buildifier_prebuilt//:rules.bzl", "buildifier")
+load("@npm//:defs.bzl", "npm_link_all_packages")
 
 buildifier(
     name = "buildifier",
@@ -17,6 +18,11 @@ buildifier(
     tags = ["manual"],  # tag as manual so windows ci does not build it by default
 )
 
+alias(
+    name = "format",
+    actual = "//tools/format",
+)
+
 bzl_library(
     name = "internal_deps",
     srcs = ["internal_deps.bzl"],
@@ -26,3 +32,5 @@ bzl_library(
         "@bazel_tools//tools/build_defs/repo:utils.bzl",
     ],
 )
+
+npm_link_all_packages(name = "node_modules")

@@ -51,3 +51,10 @@ def rules_cypress_internal_deps():
         strip_prefix = "buildifier-prebuilt-6.4.0",
         urls = ["http://github.com/keith/buildifier-prebuilt/archive/6.4.0.tar.gz"],
     )
+
+    http_archive(
+        name = "aspect_rules_lint",
+        sha256 = "1e679b081750ca9cedad4f79e371ee5e14d9a157de8018661af9fe45879100b2",
+        strip_prefix = "rules_lint-0.21.0",
+        url = "https://github.com/aspect-build/rules_lint/releases/download/v0.21.0/rules_lint-v0.21.0.tar.gz",
+    )

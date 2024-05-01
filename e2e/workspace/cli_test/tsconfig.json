@@ -1,6 +1,6 @@
 {
-    "compilerOptions": {
-        "target": "ES2022",
-        "types": ["cypress", "node"]
-    }
+  "compilerOptions": {
+    "target": "ES2022",
+    "types": ["cypress", "node"]
+  }
 }
