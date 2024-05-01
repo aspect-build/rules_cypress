@@ -32,7 +32,10 @@ def _cypress_repo_impl(repository_ctx):
     repository_ctx.file("binary_state.json", binary_state_json_contents)
 
     # Base BUILD file for this repository
-    repository_ctx.template("BUILD.bazel", Label("//cypress:BUILD.cypress"))
+    if repository_ctx.attr.platform.startswith("darwin-"):
+        repository_ctx.template("BUILD.bazel", Label("//cypress:BUILD.darwin.cypress"))
+    else:
+        repository_ctx.template("BUILD.bazel", Label("//cypress:BUILD.linux.cypress"))
 
 cypress_repositories = repository_rule(
     _cypress_repo_impl,
