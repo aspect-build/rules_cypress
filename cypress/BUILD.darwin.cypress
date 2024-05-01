@@ -1,0 +1,17 @@
+# BUILD file inserted into the cypress toolchain repository
+
+load("@aspect_rules_cypress//cypress:toolchain.bzl", "cypress_toolchain")
+load("@aspect_bazel_lib//lib:copy_directory.bzl", "copy_directory")
+load("@aspect_bazel_lib//lib:copy_to_bin.bzl", "copy_to_bin")
+
+filegroup(
+    name = "files",
+    srcs = ["Cypress.app", "binary_state.json"],
+    visibility = ["//visibility:public"],
+)
+
+cypress_toolchain(
+    name = "cypress_toolchain", 
+    target_tool = "Cypress.app/Contents/MacOS/Cypress",
+    target_tool_files = ":files",
+)

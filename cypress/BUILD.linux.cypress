@@ -4,18 +4,11 @@ load("@aspect_rules_cypress//cypress:toolchain.bzl", "cypress_toolchain")
 load("@aspect_bazel_lib//lib:copy_directory.bzl", "copy_directory")
 load("@aspect_bazel_lib//lib:copy_to_bin.bzl", "copy_to_bin")
 
-
 # Copy the cypress binary directory to make it RBE compatible.
 copy_directory(
     name = "cypress_binary",
-    src = select({
-        "@bazel_tools//src/conditions:darwin": "Cypress.app",
-        "//conditions:default": "Cypress",
-    }),
-    out = select({
-        "@bazel_tools//src/conditions:darwin": "Cypress.app",
-        "//conditions:default": "Cypress",
-    }),
+    src = "Cypress",
+    out = "Cypress",
     tags = ["manual"]
 )
 
@@ -27,18 +20,12 @@ copy_to_bin(
 
 filegroup(
     name = "files",
-    srcs = select({
-        "@bazel_tools//src/conditions:darwin": ["Cypress.app", "binary_state.json"],
-        "//conditions:default": [":cypress_binary", ":binary_state_file"]
-    }),
+    srcs = [":cypress_binary", ":binary_state_file"],
     visibility = ["//visibility:public"],
 )
 
 cypress_toolchain(
     name = "cypress_toolchain", 
-    target_tool = select({
-        "@bazel_tools//src/conditions:darwin": "Cypress.app/Contents/MacOS/Cypress",
-        "//conditions:default": "Cypress/Cypress",
-    }),
+    target_tool = "Cypress/Cypress",
     target_tool_files = ":files",
 )
