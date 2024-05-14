@@ -1,12 +1,14 @@
 bazel-*
 .bazelrc.user
-node_modules/
+node_modules
 .pnpm-*
 
 .idea/
 .ijwb/
 .vscode
 .DS_Store
+
+.github/pull_request_template.md
 
 # Bazel's MODULE lockfile isn't ready to check in yet as of Bazel 7.1.
 # Do allow for it to be created, however, since it gives a performance boost for local development.

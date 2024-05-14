@@ -22,7 +22,7 @@ load("@aspect_rules_cypress//cypress:repositories.bzl", "cypress_register_toolch
 
 cypress_register_toolchains(
     name = "cypress",
-    cypress_version = "12.12.0",
+    cypress_version = "13.6.6",
 )
 
 load("@aspect_rules_js//js:repositories.bzl", "rules_js_dependencies")
@@ -44,6 +44,10 @@ load("@aspect_rules_js//npm:npm_import.bzl", "npm_translate_lock")
 
 npm_translate_lock(
     name = "npm",
+    lifecycle_hooks_exclude = [
+        # Speed up installation by disabling cypress binary install. Optional.
+        "cypress",
+    ],
     npmrc = "//:.npmrc",
     pnpm_lock = "//:pnpm-lock.yaml",
     verify_node_modules_ignored = "//:.bazelignore",
