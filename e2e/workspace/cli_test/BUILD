@@ -5,7 +5,7 @@ cypress_test(
     timeout = "short",
     args = [
         "run",
-        "--config-file=cypress.config.ts",
+        "--config-file=cli_test/cypress.config.ts",
     ],
     data = [
         "cli_test.cy.ts",

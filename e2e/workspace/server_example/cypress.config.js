@@ -8,7 +8,7 @@ process.env.XVFB_DISPLAY_NUM = Math.floor(Math.random() * 99999).toString();
 
 module.exports = defineConfig({
   e2e: {
-    specPattern: ["server_example_test.cy.js"],
+    specPattern: ["server_example/server_example_test.cy.js"],
     supportFile: false,
     setupNodeEvents(on, config) {
       // Use "before:browser:launch" to edit config values.
@@ -20,7 +20,7 @@ module.exports = defineConfig({
       const port = "3000";
       return new Promise((resolve, reject) => {
         // Launch the server
-        const serverProcess = spawn(join(__dirname, "server.sh"), [port], {
+        const serverProcess = spawn(join(process.cwd(), "server.sh"), [port], {
           // js_binary expects to be run at execroot, but cypress rule has changed pwd to where our test target was defined.
           cwd: `${process.env.TEST_SRCDIR}/${process.env.TEST_WORKSPACE}`,
         });

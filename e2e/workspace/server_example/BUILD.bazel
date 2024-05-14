@@ -12,7 +12,7 @@ cypress_test(
     timeout = "short",
     args = [
         "run",
-        "--config-file=cypress.config.js",
+        "--config-file=server_example/cypress.config.js",
     ],
     data = [
         "cypress.config.js",
