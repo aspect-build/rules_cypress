@@ -22,7 +22,6 @@ def _cypress_test_macro(name, entry_point, cypress, disable_sandbox, **kwargs):
         data = kwargs.pop("data", []) + [
             cypress,
         ],
-        chdir = native.package_name(),
         enable_runfiles = select({
             "@aspect_rules_js//js/private:enable_runfiles": True,
             "//conditions:default": False,

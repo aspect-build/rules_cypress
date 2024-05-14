@@ -5,7 +5,7 @@ process.env.XVFB_DISPLAY_NUM = Math.floor(Math.random() * 99999).toString();
 
 export default defineConfig({
   e2e: {
-    specPattern: ["cli_test.cy.ts"],
+    specPattern: ["cli_test/cli_test.cy.ts"],
     supportFile: false,
     setupNodeEvents(on, config) {
       on("before:browser:launch", (browser, launchOptions) => {
