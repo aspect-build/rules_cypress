@@ -4,7 +4,8 @@ cypress_test(
     name = "cli_test",
     timeout = "short",
     args = [
-        "run",
+        "--e2e",
+        "--browser=electron",
         "--config-file=cli_test/cypress.config.ts",
     ],
     data = [

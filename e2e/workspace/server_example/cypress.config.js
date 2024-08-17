@@ -17,12 +17,12 @@ module.exports = defineConfig({
         launchOptions.args.push("--disable-gpu-shader-disk-cache");
       });
 
-      const port = "3000";
+      const port = "4000";
       return new Promise((resolve, reject) => {
         // Launch the server
         const workspaceRoot = join(
-          process.env.RUNFILES_DIR,
-          process.env.TEST_WORKSPACE,
+          process.env.JS_BINARY__RUNFILES,
+          process.env.TEST_WORKSPACE || '_main',
         );
         const serverProcess = spawn(
           join(workspaceRoot, "server_example/server_/server"),
