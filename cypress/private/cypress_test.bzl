@@ -9,21 +9,15 @@ _attrs = dicts.add(js_binary_lib.attrs, {
     ),
 })
 
-# Do the opposite of _to_manifest_path in
-# https://github.com/bazelbuild/rules_nodejs/blob/8b5d27400db51e7027fe95ae413eeabea4856f8e/nodejs/toolchain.bzl#L50
-# to get back to the short_path.
-# TODO: fix toolchain so we don't have to do this
-def _target_tool_short_path(path):
-    return ("../" + path[len("external/"):]) if path.startswith("external/") else path
-
 def _impl(ctx):
-    cypress_bin = _target_tool_short_path(ctx.toolchains["@aspect_rules_cypress//cypress:toolchain_type"].cypressinfo.target_tool_path)
+    cypress_bin = ctx.toolchains["@aspect_rules_cypress//cypress:toolchain_type"].cypressinfo.target_tool_path
     cypress_files = ctx.toolchains["@aspect_rules_cypress//cypress:toolchain_type"].cypressinfo.tool_files
 
     files = ctx.files.data[:] + cypress_files + ctx.files.browsers
 
-    if ctx.attr.chdir:
-        cypress_bin = "/".join([".." for _ in ctx.attr.chdir.split("/")] + [cypress_bin])
+    # TODO: Augment rules_js to expose JS__EXECROOT before setting fixed_env. Then use that variable.
+    execroot = "$$( realpath \"$${BASH_SOURCE[0]}\" | sed -E 's/^(.*\\/execroot\\/[^/]+).*/\\1/')"
+    cypress_run_binary = "/".join([execroot, cypress_bin])
 
     launcher = js_binary_lib.create_launcher(
         ctx,
@@ -31,9 +25,7 @@ def _impl(ctx):
         log_prefix_rule = "cypress_node_test",
         fixed_args = ctx.attr.fixed_args,
         fixed_env = {
-            "CYPRESS_RUN_BINARY": cypress_bin,
-            "HOME": "$$TEST_TMPDIR",
-            "XDG_CONFIG_HOME": "$$TEST_TMPDIR",
+            "CYPRESS_RUN_BINARY": cypress_run_binary,
         },
     )
 

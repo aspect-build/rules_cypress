@@ -2,6 +2,7 @@
 
 load("@aspect_bazel_lib//lib:directory_path.bzl", "directory_path")
 load("@aspect_rules_cypress//cypress/private:cypress_test.bzl", "cypress_test_lib")
+load("@aspect_rules_js//js:defs.bzl", "js_run_devserver")
 load("@aspect_rules_js//js:libs.bzl", "js_binary_lib")
 
 _cypress_test = rule(
@@ -43,6 +44,9 @@ def cypress_test(
     See documentation on what arguments the cypress CLI supports:
     https://docs.cypress.io/guides/guides/command-line#What-you-ll-learn
 
+    Macro produces two targets:
+      - `[name]`: Test target which will invoke `cypress run`
+      - `[name].open`: Runnable target which will invoke `cypress open`. Meant to be used in conjunction with ibazel
 
     Args:
         name: The name used for this rule and output files
@@ -83,13 +87,27 @@ def cypress_test(
         tags = ["manual"],
     )
 
+    args = kwargs.pop("args", [])
+    data = kwargs.pop("data", [])
     _cypress_test_macro(
         name = name,
         entry_point = entry_point,
         cypress = cypress,
         disable_sandbox = disable_sandbox,
         browsers = browsers,
+        args = ["run"] + args,
+        data = data,
         **kwargs
+    )
+
+    js_run_devserver(
+        name = name + ".open",
+        tool = name,
+        args = ["open"] + args,
+        # Allow using _cypress_test_macro as the tool. It is testonly so this target also needs to be testonly.
+        testonly = True,
+        data = data,
+        grant_sandbox_write_permissions = True,
     )
 
 def cypress_module_test(

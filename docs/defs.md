@@ -73,6 +73,9 @@ The environment is bootstrapped by first setting the environment variable `CYPRE
 See documentation on what arguments the cypress CLI supports:
 https://docs.cypress.io/guides/guides/command-line#What-you-ll-learn
 
+Macro produces two targets:
+  - `[name]`: Test target which will invoke `cypress run`
+  - `[name].open`: Runnable target which will invoke `cypress open`. Meant to be used in conjunction with ibazel
 
 
 **PARAMETERS**

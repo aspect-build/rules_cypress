@@ -11,7 +11,8 @@ cypress_test(
     name = "server_example",
     timeout = "short",
     args = [
-        "run",
+        "--e2e",
+        "--browser=electron",
         "--config-file=server_example/cypress.config.js",
     ],
     data = [
