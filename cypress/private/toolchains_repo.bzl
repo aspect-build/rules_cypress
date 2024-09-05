@@ -86,6 +86,12 @@ toolchain(
     toolchain = "@{user_repository_name}_{platform}//:cypress_toolchain",
     toolchain_type = "@aspect_rules_cypress//cypress:toolchain_type",
 )
+toolchain(
+    name = "{platform}_toolchain_target",
+    target_compatible_with = {compatible_with},
+    toolchain = "@{user_repository_name}_{platform}//:cypress_toolchain",
+    toolchain_type = "@aspect_rules_cypress//cypress:toolchain_type",
+)
 """.format(
             platform = platform,
             name = repository_ctx.attr.name,

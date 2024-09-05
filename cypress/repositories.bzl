@@ -32,7 +32,12 @@ def _cypress_repo_impl(repository_ctx):
     repository_ctx.file("binary_state.json", binary_state_json_contents)
 
     # Base BUILD file for this repository
-    repository_ctx.template("BUILD.bazel", Label("//cypress:BUILD.cypress"))
+    is_darwin = repository_ctx.attr.platform.startswith("darwin")
+    substitution = {
+        "%{COPY_DIRECTORY_SRC}": "Cypress.app" if is_darwin else "Cypress",
+        "%{TARGET_TOOL}": "Cypress/Contents/MacOS/Cypress" if is_darwin else "Cypress/Cypress",
+    }
+    repository_ctx.template("BUILD.bazel", Label("//cypress:BUILD.cypress"), substitution)
 
 cypress_repositories = repository_rule(
     _cypress_repo_impl,
@@ -86,6 +91,7 @@ Alternately, you may manually specify platform integrity hashes with cypress_int
         )
         if register:
             native.register_toolchains("@%s_toolchains//:%s_toolchain" % (name, platform))
+            native.register_toolchains("@%s_toolchains//:%s_toolchain_target" % (name, platform))
 
     toolchains_repo(
         name = name + "_toolchains",
