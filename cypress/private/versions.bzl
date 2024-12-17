@@ -3,6 +3,13 @@
 # Use /scripts/mirror_release.sh to add a newer version below.
 # Versions should be descending order so TOOL_VERSIONS.keys()[0] is the latest version.
 TOOL_VERSIONS = {
+    "13.17.0": {
+        "darwin-x64": "1cef9ccca2d31e0273fdd8fa49b90f100a5b2fd553f422c30079892b231d1342",
+        "darwin-arm64": "45cb0824d223c491634b23acc7eb0082755dbe7475858112f5130b5bf8baf0bf",
+        "linux-x64": "5d3f50a8e491067288d27567a01fabf39938375870cdf1107ba6620f8f81a2f0",
+        "linux-arm64": "d574c41661e05cad44ea66f56b323bf89e8a5d8d6a21acb3fc0f36d7ae29a5ec",
+        "win32-x64": "93532f4df3ac8c1b4019d67b9a247cc7ab1fe5b450af8f8bdd61d05049197509",
+    },
     "13.7.3": {
         "darwin-x64": "d24aaadf9e7f014c137fd36efe571e7f5cae3ae0e709b79e4882913f36ac6649",
         "darwin-arm64": "d96a0ad65967a6c24652f7fb694a56ad593328a7b112943bfd986645577f5b0e",
