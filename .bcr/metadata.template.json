@@ -2,9 +2,14 @@
   "homepage": "https://docs.aspect.build/rules/aspect_rules_cypress",
   "maintainers": [
     {
-      "email": "hello@aspect.dev",
-      "github": "aspect-build",
-      "name": "Aspect team"
+      "email": "mrmeku@aspect.build",
+      "github": "mrmeku",
+      "name": "Dan Muller"
+    },
+    {
+      "email": "greg@aspect.build",
+      "github": "gregmagolan",
+      "name": "Greg Magolan"
     }
   ],
   "repository": ["github:aspect-build/rules_cypress"],
