@@ -41,7 +41,7 @@ cypress_repositories = repository_rule(
 )
 
 # Wrapper macro around everything above, this is the primary API
-def cypress_register_toolchains(name, cypress_version = None, cypress_integrity = None, register = True):
+def cypress_register_toolchains(name, cypress_version = None, cypress_integrity = {}, register = True):
     """
     Convenience macro for setting up cypress toolchain for all supported platforms.
 
@@ -68,7 +68,7 @@ def cypress_register_toolchains(name, cypress_version = None, cypress_integrity 
             Should be True when used from a WORKSPACE file, and False used from bzlmod
             which has its own toolchain registration syntax.
     """
-    if not cypress_integrity:
+    if len(cypress_integrity.items()) == 0:
         if cypress_version not in TOOL_VERSIONS.keys():
             fail("""\
 cypress version {} is not currently mirrored into rules_cypress.
