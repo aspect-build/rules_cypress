@@ -8,6 +8,7 @@ def _toolchain_extension(module_ctx):
             cypress_register_toolchains(
                 name = toolchain.name,
                 cypress_version = toolchain.cypress_version,
+                cypress_integrity = toolchain.cypress_integrity,
                 register = False,
             )
 
@@ -21,6 +22,9 @@ cypress = module_extension(
             ),
             "cypress_version": attr.string(
                 doc = "Version of cypress to download",
+            ),
+            "cypress_integrity": attr.string_dict(
+                doc = "Mapping from platform to integrity file hash. See cypress_register_toolchains",
             ),
         }),
     },
