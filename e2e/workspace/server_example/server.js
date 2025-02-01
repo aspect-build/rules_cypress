@@ -7,6 +7,7 @@ if (isNaN(port)) {
 }
 
 app.get("/", (req, res) => {
+  res.type('html');
   res.send(`
 <html>
     <body>
