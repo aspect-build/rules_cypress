@@ -3,6 +3,34 @@
 # Use /scripts/mirror_release.sh to add a newer version below.
 # Versions should be descending order so TOOL_VERSIONS.keys()[0] is the latest version.
 TOOL_VERSIONS = {
+    "14.5.1": {
+        "darwin-x64": "cbd4c80ea34a5526c64719859858f5c9378d43daceba62c4bc9fa2719ab27bf7",
+        "darwin-arm64": "3d3cbc0b30d463b616d28a01e462fc65dfeddd500580018412a5c928d6137eca",
+        "linux-x64": "d8943a4857dd73641433c93df93563ae3efba2291171c676c676b9d59092599e",
+        "linux-arm64": "821f24e7b90a570933fc889ffd09304d66cf8a7ad44ba098d732398e9789cc86",
+        "win32-x64": "add7cfccb577c0965664221947ca3de7231143d768b54b92659c6891247d4194",
+    },
+    "14.5.0": {
+        "darwin-x64": "64fbe80b928aea644c47b9594e52d66e62bb1a815b132c8250f1bf2cb1dec434",
+        "darwin-arm64": "dd48705af54ae08e3565291b7916c49db060fa42c05edb41c109f60049eb849d",
+        "linux-x64": "701ecd06e496c434efc23db9b695459faf1ea33b915d800ea639f3e39e90d2cd",
+        "linux-arm64": "5297ed91988a053128a6009efe7cab3878ede716e60fd22bb570c091e4a8a632",
+        "win32-x64": "5a708e52b9e3bbb45b87eba9aff1ce8191a466342d17aadedc002418f9dde2f6",
+    },
+    "14.4.1": {
+        "darwin-x64": "687d104eb9310bc9cbb47d615e60198288c2700b68177059964afa30cbefd54c",
+        "darwin-arm64": "28142c9633b44092ca8b0a6c28f02338b17598398e2d6f79b659e68bad75db6f",
+        "linux-x64": "f2d34b96a9d6739992304587baff5cdcd7d556b7df32c554f60c82623910dcd1",
+        "linux-arm64": "4b202973b944395cab125d3a6b18fc60ec4bb6693521d1f3e4a8782537262cca",
+        "win32-x64": "2a33761b1811c2a9f375d89f3aa4ebdb03bc8e29d20847f3c34950bacff243bc",
+    },
+    "14.4.0": {
+        "darwin-x64": "7cf63f016fa72395cb8929b19bd0450ece0653da4067e8df0e6ff5e40fd862fc",
+        "darwin-arm64": "463748fe1668c6f6587a448b291538c655c2b565a4ebcdb1bcf61e240906fa09",
+        "linux-x64": "1673848c97182e156caa4d757193b29edfd1deaef1decfa97ce94b305eab61c4",
+        "linux-arm64": "776c77f8fb75a3b3e86ac3ca4b3884fe9fd5351277eae932d24b73257726f33f",
+        "win32-x64": "87bc8008ac11a43256f5869f86cb4a95476ab7cde87bc9406c3778d9fcb0f028",
+    },
     "14.0.0": {
         "darwin-x64": "cd5215a58006342eca2401c460ef6eae91525eaf16ee04a11628ac24913f9177",
         "darwin-arm64": "dccbc69d7bb30cbb266448c3dc67378c6eab8f7e3382704772eabf2fcc042bae",
