@@ -3,8 +3,9 @@
 # suitable for appending to cypress/private/versions.bzl
 set -o errexit -o nounset
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
+CYPRESS_VERSION_ARG="${1:-latest}"
 
-version="${1:-$(curl --silent "https://registry.npmjs.org/cypress/latest" | jq --raw-output ".version")}"
+version="${1:-$(curl --silent "https://registry.npmjs.org/cypress/$CYPRESS_VERSION_ARG" | jq --raw-output ".version")}"
 
 echo "    \"$version\": {"
 for pkg in darwin-{x,arm}64 linux-{x,arm}64 win32-x64; do
