@@ -12,7 +12,18 @@ git archive --format=tar --prefix=${PREFIX}/ ${TAG} | gzip >$ARCHIVE
 SHA=$(shasum -a 256 $ARCHIVE | awk '{print $1}')
 
 cat <<EOF
-WORKSPACE snippet:
+## Using [Bzlmod]:
+
+Add to your \`MODULE.bazel\` file:
+
+\`\`\`starlark
+bazel_dep(name = "aspect_rules_cypress", version = "${TAG:1}", dev_dependency = True)
+\`\`\`
+
+[Bzlmod]: https://bazel.build/build/bzlmod
+
+## Using legacy WORKSPACE
+
 \`\`\`starlark
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 http_archive(
