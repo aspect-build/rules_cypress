@@ -13,7 +13,7 @@ _cypress_test = rule(
 )
 
 def _cypress_test_macro(name, entry_point, cypress, disable_sandbox, **kwargs):
-    tags = list(kwargs.pop("tags", []))
+    tags = kwargs.pop("tags", [])[:]
     if disable_sandbox:
         tags.append("no-sandbox")
     _cypress_test(
