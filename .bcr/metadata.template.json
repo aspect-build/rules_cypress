@@ -10,6 +10,11 @@
       "email": "greg@aspect.build",
       "github": "gregmagolan",
       "name": "Greg Magolan"
+    },
+    {
+      "email": "jason@aspect.build",
+      "github": "jbedard",
+      "name": "Jason Bedard"
     }
   ],
   "repository": ["github:aspect-build/rules_cypress"],
