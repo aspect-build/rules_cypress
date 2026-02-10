@@ -10,7 +10,6 @@ TOOL_VERSIONS = {
         "linux-arm64": "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5",
         "win32-x64": "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5",
     },
-
     "15.7.0": {
         "darwin-x64": "17d1aeb7633048a858189b97703064d05c27329fb01ec7a34b8f85a7154ff8e9",
         "darwin-arm64": "98c86b8e9dcacd72b855160dd57cd218b6b1378a26c9daf1ec04dd3160499054",
