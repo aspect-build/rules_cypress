@@ -30,6 +30,12 @@ bzl_library(
     visibility = ["//visibility:public"],
 )
 
+starlark_doc_extract(
+    name = "extensions.doc_extract",
+    src = "extensions.bzl",
+    deps = [":extensions"],
+)
+
 bzl_library(
     name = "defs",
     srcs = ["defs.bzl"],
@@ -40,17 +46,14 @@ bzl_library(
     ],
 )
 
+starlark_doc_extract(
+    name = "defs.doc_extract",
+    src = "defs.bzl",
+    deps = [":defs"],
+)
+
 bzl_library(
     name = "toolchain",
     srcs = ["toolchain.bzl"],
     visibility = ["//visibility:public"],
 )
-
-[
-    starlark_doc_extract(
-        name = module_name + "_docs",
-        src = module_name + ".bzl",
-        deps = [":" + module_name],
-    )
-    for module_name in ["extensions", "defs"]
-]
