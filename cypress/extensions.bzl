@@ -1,7 +1,7 @@
 "extensions for bzlmod"
 
-load("@aspect_rules_cypress//cypress:repositories.bzl", "cypress_register_toolchains")
 load("@aspect_tools_telemetry_report//:defs.bzl", "TELEMETRY")  # buildifier: disable=load
+load("//cypress:repositories.bzl", "cypress_register_toolchains")
 
 def _toolchain_extension(module_ctx):
     for mod in module_ctx.modules:
