@@ -23,11 +23,11 @@ bzl_library(
 bzl_library(
     name = "extensions",
     srcs = ["extensions.bzl"],
+    visibility = ["//visibility:public"],
     deps = [
         ":repositories",
         "@aspect_tools_telemetry_report//:defs.bzl",
     ],
-    visibility = ["//visibility:public"],
 )
 
 starlark_doc_extract(
