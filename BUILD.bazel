@@ -1,6 +1,21 @@
 load("@bazel_skylib//:bzl_library.bzl", "bzl_library")
+load("@bazel_skylib//rules:build_test.bzl", "build_test")
 load("@buildifier_prebuilt//:rules.bzl", "buildifier")
 load("@npm//:defs.bzl", "npm_link_all_packages")
+
+# A version-independent test so `bazel test //...` always has at least one test
+# target on every Bazel version in CI (the //tools:preset self-test is skipped
+# on non-primary versions). Building the public API surface validates that the
+# ruleset loads and analyzes.
+build_test(
+    name = "public_api_build_test",
+    targets = [
+        "//cypress:defs",
+        "//cypress:extensions",
+        "//cypress:repositories",
+        "//cypress:toolchain",
+    ],
+)
 
 buildifier(
     name = "buildifier",

@@ -1,20 +1,12 @@
 load("@aspect_rules_lint//format:defs.bzl", "format_multirun")
-load("@npm//:prettier/package_json.bzl", prettier = "bin")
 
-package(default_visibility = ["//visibility:public"])
+package(default_visibility = ["//:__subpackages__"])
 
-prettier.prettier_binary(
-    name = "prettier",
-    # Allow the binary to be run outside bazel
-    env = {"BAZEL_BINDIR": "."},
-)
-
+# `manual` keeps the generated `.check` test targets out of `bazel test //...`
+# wildcards; Starlark formatting is enforced in CI via `aspect buildifier`.
 format_multirun(
     name = "format",
-    go = None,
-    javascript = ":prettier",
-    jsonnet = None,
-    shell = None,
-    terraform = None,
-    yaml = None,
+    shell = "@aspect_rules_lint//format:shfmt",
+    tags = ["manual"],
+    yaml = "@aspect_rules_lint//format:yamlfmt",
 )
