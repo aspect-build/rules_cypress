@@ -1,1 +1,5 @@
 import %workspace%/../../tools/preset.bazelrc
+
+# Override the preset's `--lockfile_mode=error` on CI since we don't
+# commit MODULE.bazel.lock — see .gitignore.
+common:ci --lockfile_mode=off
