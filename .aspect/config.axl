@@ -17,9 +17,9 @@ buildifier = format.alias(
         # and per-file invocations are unaffected.
         #
         # Caveat: `buildifier -r .` auto-discovers only BUILD, BUILD.bazel,
-        # MODULE.bazel, WORKSPACE, WORKSPACE.bazel, *.bzl, and *.star, so
-        # `--scope=all` silently skips *.axl, *.MODULE.bazel, Tiltfile, and
-        # BUCK files from the `include_patterns` list below. `--scope=changed`
+        # MODULE.bazel, *.bzl, and *.star, so `--scope=all` silently skips
+        # *.axl, *.MODULE.bazel, Tiltfile, and BUCK files from the
+        # `include_patterns` list below. `--scope=changed`
         # passes the changed file list positionally, so those extensions are
         # covered there. See
         # https://docs.aspect.build/cli/tasks/buildifier#run-it-locally for
@@ -36,8 +36,6 @@ buildifier = format.alias(
             "**/MODULE.bazel",
             "**/*.MODULE.bazel",
             "**/Tiltfile",
-            "**/WORKSPACE",
-            "**/WORKSPACE.bazel",
             "**/*.axl",
             "**/*.bzl",
             "**/*.star",
