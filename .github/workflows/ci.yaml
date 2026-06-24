@@ -24,6 +24,8 @@ jobs:
           m=${v::1}
           a=(
             "major:$m, version:\"$v\""
+            "major:8, version:\"8.x\""
+            "major:9, version:\"9.x\""
           )
           printf -v j '{%s},' "${a[@]}"
           echo "res=[${j%,}]" | tee -a $GITHUB_OUTPUT
@@ -66,6 +68,13 @@ jobs:
           # Root workspace is bzlmod-only
           - folder: .
             bzlmod: 0
+          # Bazel 8 and 9 are tested with bzlmod only (WORKSPACE is deprecated in 8, removed in 9)
+          - bzlmod: 0
+            bazel-version:
+              major: 8
+          - bzlmod: 0
+            bazel-version:
+              major: 9
 
     steps:
       - uses: actions/checkout@v6

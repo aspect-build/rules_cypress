@@ -1,4 +1,5 @@
 load("@bazel_skylib//:bzl_library.bzl", "bzl_library")
+load("@bazel_skylib//rules:build_test.bzl", "build_test")
 
 # This is the target rule authors should put in their "toolchains"
 # attribute in order to get a runtime for the correct platform.
@@ -56,4 +57,15 @@ bzl_library(
     name = "toolchain",
     srcs = ["toolchain.bzl"],
     visibility = ["//visibility:public"],
+)
+
+# Smoke test that the ruleset's public Starlark builds on every supported Bazel version.
+# Also guarantees `bazel test //...` has a test target on Bazel 8/9, where the bazelrc
+# preset test (//tools:preset.update_test) is pinned to .bazelversion and skipped.
+build_test(
+    name = "build_test",
+    targets = [
+        ":defs.doc_extract",
+        ":extensions.doc_extract",
+    ],
 )
