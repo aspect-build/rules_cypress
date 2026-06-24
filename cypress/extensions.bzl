@@ -10,7 +10,6 @@ def _toolchain_extension(module_ctx):
                 name = toolchain.name,
                 cypress_version = toolchain.cypress_version,
                 cypress_integrity = toolchain.cypress_integrity,
-                register = False,
             )
 
 cypress = module_extension(

@@ -9,7 +9,6 @@ TAG=${GITHUB_REF_NAME}
 PREFIX="rules_cypress-${TAG:1}"
 ARCHIVE="rules_cypress-$TAG.tar.gz"
 git archive --format=tar --prefix=${PREFIX}/ ${TAG} | gzip >$ARCHIVE
-SHA=$(shasum -a 256 $ARCHIVE | awk '{print $1}')
 
 cat <<EOF
 ## Using [Bzlmod]:
@@ -21,18 +20,4 @@ bazel_dep(name = "aspect_rules_cypress", version = "${TAG:1}", dev_dependency = 
 \`\`\`
 
 [Bzlmod]: https://bazel.build/build/bzlmod
-
-## Using legacy WORKSPACE
-
-\`\`\`starlark
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-http_archive(
-    name = "aspect_rules_cypress",
-    sha256 = "${SHA}",
-    strip_prefix = "${PREFIX}",
-    url = "https://github.com/aspect-build/rules_cypress/releases/download/${TAG}/${ARCHIVE}",
-)
 EOF
-
-awk 'f;/--SNIP--/{f=1}' e2e/workspace/WORKSPACE.bazel
-echo "\`\`\`"
