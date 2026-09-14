@@ -34,6 +34,8 @@ def _impl(ctx):
             "CYPRESS_RUN_BINARY": cypress_bin,
             "HOME": "$$TEST_TMPDIR",
             "XDG_CONFIG_HOME": "$$TEST_TMPDIR",
+            # Unique Xvfb display per test process so parallel tests don't race for :99
+            "XVFB_DISPLAY_NUM": "$$$$",
         },
     )
 
