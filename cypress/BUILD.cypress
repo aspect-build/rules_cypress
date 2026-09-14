@@ -1,8 +1,8 @@
 # BUILD file inserted into the cypress toolchain repository
 
 load("@aspect_rules_cypress//cypress:toolchain.bzl", "cypress_toolchain")
-load("@aspect_bazel_lib//lib:copy_directory.bzl", "copy_directory")
-load("@aspect_bazel_lib//lib:copy_to_bin.bzl", "copy_to_bin")
+load("@bazel_lib//lib:copy_directory.bzl", "copy_directory")
+load("@bazel_lib//lib:copy_to_bin.bzl", "copy_to_bin")
 
 
 # Copy the cypress binary directory to make it RBE compatible.

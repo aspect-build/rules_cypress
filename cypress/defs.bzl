@@ -1,8 +1,8 @@
 "Public API re-exports"
 
-load("@aspect_bazel_lib//lib:directory_path.bzl", "directory_path")
 load("@aspect_rules_cypress//cypress/private:cypress_test.bzl", "cypress_test_lib")
 load("@aspect_rules_js//js:libs.bzl", "js_binary_lib")
+load("@bazel_lib//lib:directory_path.bzl", "directory_path")
 
 _cypress_test = rule(
     doc = """Identical to js_test with the addition of the cypress toolchain made available.""",
@@ -23,7 +23,7 @@ def _cypress_test_macro(name, entry_point, cypress, disable_sandbox, **kwargs):
             cypress,
         ],
         enable_runfiles = select({
-            Label("@aspect_bazel_lib//lib:enable_runfiles"): True,
+            Label("@bazel_lib//lib:enable_runfiles"): True,
             "//conditions:default": False,
         }),
         tags = tags,
