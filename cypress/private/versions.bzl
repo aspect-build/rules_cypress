@@ -4,11 +4,10 @@
 # Versions should be descending order so TOOL_VERSIONS.keys()[0] is the latest version.
 TOOL_VERSIONS = {
     "15.10.0": {
-        "darwin-x64": "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5",
-        "darwin-arm64": "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5",
-        "linux-x64": "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5",
-        "linux-arm64": "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5",
-        "win32-x64": "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5",
+        "darwin-x64": "edf6bfc511e3cc210832806e9dfd6f5b7fe6bbbe3f2fafc840ed4df4adfaf97e",
+        "darwin-arm64": "8b61a88fc2671b4a49c933001ebc9563bd0f983c035c86749b26678d0b101b6b",
+        "linux-x64": "9bcd452ee3c47324f647ad99d14883f65661c8c2d1f7c9cddec5eb94700fb682",
+        "linux-arm64": "86475069d2edbacabc692d1fd6f1ec308c9e310feb7492c0cb9bf51955a056ad",
     },
     "15.7.0": {
         "darwin-x64": "17d1aeb7633048a858189b97703064d05c27329fb01ec7a34b8f85a7154ff8e9",
