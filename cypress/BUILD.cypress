@@ -4,40 +4,45 @@ load("@aspect_rules_cypress//cypress:toolchain.bzl", "cypress_toolchain")
 load("@bazel_lib//lib:copy_directory.bzl", "copy_directory")
 load("@bazel_lib//lib:copy_to_bin.bzl", "copy_to_bin")
 
-
 # Copy the cypress binary directory to make it RBE compatible.
 copy_directory(
     name = "cypress_binary",
     src = select({
-        "@bazel_tools//src/conditions:darwin": "Cypress.app",
+        "@platforms//os:macos": "Cypress.app",
         "//conditions:default": "Cypress",
     }),
     out = select({
-        "@bazel_tools//src/conditions:darwin": "Cypress.app",
+        "@platforms//os:macos": "Cypress.app",
         "//conditions:default": "Cypress",
     }),
-    tags = ["manual"]
+    tags = ["manual"],
 )
 
 copy_to_bin(
     name = "binary_state_file",
     srcs = ["binary_state.json"],
-    tags = ["manual"]
+    tags = ["manual"],
 )
 
 filegroup(
     name = "files",
     srcs = select({
-        "@bazel_tools//src/conditions:darwin": ["Cypress.app", "binary_state.json"],
-        "//conditions:default": [":cypress_binary", ":binary_state_file"]
+        "@platforms//os:macos": [
+            "Cypress.app",
+            "binary_state.json",
+        ],
+        "//conditions:default": [
+            ":binary_state_file",
+            ":cypress_binary",
+        ],
     }),
     visibility = ["//visibility:public"],
 )
 
 cypress_toolchain(
-    name = "cypress_toolchain", 
+    name = "cypress_toolchain",
     target_tool = select({
-        "@bazel_tools//src/conditions:darwin": "Cypress.app/Contents/MacOS/Cypress",
+        "@platforms//os:macos": "Cypress.app/Contents/MacOS/Cypress",
         "//conditions:default": "Cypress/Cypress",
     }),
     target_tool_files = ":files",
