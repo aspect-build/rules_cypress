@@ -188,7 +188,7 @@
     "@@aspect_rules_cypress+//cypress:extensions.bzl%cypress": {
       "general": {
         "bzlTransitiveDigest": "OYTkYvLkGQKt6hjJd2pL0ZsMe/GHX+EOMU2q0LU6i74=",
-        "usagesDigest": "VROVqZVy5YvGno0tYLjEJ5s6aJpj5xUqYdFrQskdI7o=",
+        "usagesDigest": "B6df5wSV1OsaymU0D9cxjyfQsHtMZHfwsC+nah9Jk8M=",
         "recordedInputs": [
           "REPO_MAPPING:aspect_rules_cypress+,aspect_tools_telemetry_report aspect_tools_telemetry++telemetry+aspect_tools_telemetry_report"
         ],
@@ -196,39 +196,77 @@
           "cypress_darwin-x64": {
             "repoRuleId": "@@aspect_rules_cypress+//cypress:repositories.bzl%cypress_repositories",
             "attributes": {
-              "version": "13.6.6",
+              "version": "15.10.0",
               "platform": "darwin-x64",
-              "sha256": "4b845921f35f520b8217a4ebb9106180c56de37a9db7f57f14352060c9eddca6"
+              "sha256": "edf6bfc511e3cc210832806e9dfd6f5b7fe6bbbe3f2fafc840ed4df4adfaf97e"
             }
           },
           "cypress_darwin-arm64": {
             "repoRuleId": "@@aspect_rules_cypress+//cypress:repositories.bzl%cypress_repositories",
             "attributes": {
-              "version": "13.6.6",
+              "version": "15.10.0",
               "platform": "darwin-arm64",
-              "sha256": "4c8818534bdab028a82aefc1936a552481fa0efb2a7c5c64350e9d9d1c709c85"
+              "sha256": "8b61a88fc2671b4a49c933001ebc9563bd0f983c035c86749b26678d0b101b6b"
             }
           },
           "cypress_linux-x64": {
             "repoRuleId": "@@aspect_rules_cypress+//cypress:repositories.bzl%cypress_repositories",
             "attributes": {
-              "version": "13.6.6",
+              "version": "15.10.0",
               "platform": "linux-x64",
-              "sha256": "0fe6f52c41912245a71f71c0978a3a64e0dcc9dec4449809c5bf0442032a9912"
+              "sha256": "9bcd452ee3c47324f647ad99d14883f65661c8c2d1f7c9cddec5eb94700fb682"
             }
           },
           "cypress_linux-arm64": {
             "repoRuleId": "@@aspect_rules_cypress+//cypress:repositories.bzl%cypress_repositories",
             "attributes": {
-              "version": "13.6.6",
+              "version": "15.10.0",
               "platform": "linux-arm64",
-              "sha256": "0fc709f4ae9121f5f7f1bb68423b8ec9c9d9f6c9baf85fcbe0cde3ee9627cc38"
+              "sha256": "86475069d2edbacabc692d1fd6f1ec308c9e310feb7492c0cb9bf51955a056ad"
             }
           },
           "cypress_toolchains": {
             "repoRuleId": "@@aspect_rules_cypress+//cypress/private:toolchains_repo.bzl%toolchains_repo",
             "attributes": {
               "user_repository_name": "cypress"
+            }
+          },
+          "cypress13_darwin-x64": {
+            "repoRuleId": "@@aspect_rules_cypress+//cypress:repositories.bzl%cypress_repositories",
+            "attributes": {
+              "version": "13.0.0",
+              "platform": "darwin-x64",
+              "sha256": "8c4b43760f99227b9ffd318499399b43fc0a4d967f2782c7a32e7ba8b2c13efe"
+            }
+          },
+          "cypress13_darwin-arm64": {
+            "repoRuleId": "@@aspect_rules_cypress+//cypress:repositories.bzl%cypress_repositories",
+            "attributes": {
+              "version": "13.0.0",
+              "platform": "darwin-arm64",
+              "sha256": "ae4dde9e9cb5cdf9eb7ecfeaa1580a6d38683ee1fe66f86482bd2ca67439f25b"
+            }
+          },
+          "cypress13_linux-x64": {
+            "repoRuleId": "@@aspect_rules_cypress+//cypress:repositories.bzl%cypress_repositories",
+            "attributes": {
+              "version": "13.0.0",
+              "platform": "linux-x64",
+              "sha256": "9aad71c40f4204009fe7e28240393ac9dd454770f26c93cac955c865098bf621"
+            }
+          },
+          "cypress13_linux-arm64": {
+            "repoRuleId": "@@aspect_rules_cypress+//cypress:repositories.bzl%cypress_repositories",
+            "attributes": {
+              "version": "13.0.0",
+              "platform": "linux-arm64",
+              "sha256": "1bd5584520189bb76a02d0b12e0775883464ad572dcca763d96272fabd4e7afc"
+            }
+          },
+          "cypress13_toolchains": {
+            "repoRuleId": "@@aspect_rules_cypress+//cypress/private:toolchains_repo.bzl%toolchains_repo",
+            "attributes": {
+              "user_repository_name": "cypress13"
             }
           }
         }

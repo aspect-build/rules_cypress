@@ -4,6 +4,8 @@ load("@aspect_rules_cypress//cypress:toolchain.bzl", "cypress_toolchain")
 load("@bazel_lib//lib:copy_directory.bzl", "copy_directory")
 load("@bazel_lib//lib:copy_to_bin.bzl", "copy_to_bin")
 
+exports_files(["Cypress.app"])
+
 # Copy the cypress binary directory to make it RBE compatible.
 copy_directory(
     name = "cypress_binary",
@@ -16,6 +18,7 @@ copy_directory(
         "//conditions:default": "Cypress",
     }),
     tags = ["manual"],
+    visibility = ["//visibility:public"],
 )
 
 copy_to_bin(

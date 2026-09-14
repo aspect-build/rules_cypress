@@ -1,4 +1,4 @@
-const cypress = require("cypress");
+const cypress = require(process.env.CYPRESS_PACKAGE || "cypress");
 
 async function main() {
   const result = await cypress.run({

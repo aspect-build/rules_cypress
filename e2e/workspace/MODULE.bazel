@@ -5,12 +5,24 @@ local_path_override(
 )
 
 cypress = use_extension("@aspect_rules_cypress//cypress:extensions.bzl", "cypress", dev_dependency = True)
-cypress.toolchain(cypress_version = "13.6.6")
-use_repo(cypress, "cypress_toolchains")
+cypress.toolchain(cypress_version = "15.10.0")
+cypress.toolchain(
+    name = "cypress13",
+    cypress_version = "13.0.0",
+)
+use_repo(
+    cypress,
+    "cypress13_darwin-arm64",
+    "cypress13_darwin-x64",
+    "cypress13_linux-arm64",
+    "cypress13_linux-x64",
+    "cypress_toolchains",
+)
 
 register_toolchains("@cypress_toolchains//:all")
 
 bazel_dep(name = "bazel_lib", version = "3.0.0", dev_dependency = True)
+bazel_dep(name = "platforms", version = "1.0.0", dev_dependency = True)
 bazel_dep(name = "aspect_rules_js", version = "3.4.1", dev_dependency = True)
 
 npm = use_extension("@aspect_rules_js//npm:extensions.bzl", "npm", dev_dependency = True)

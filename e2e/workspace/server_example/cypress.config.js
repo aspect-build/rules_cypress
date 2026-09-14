@@ -14,7 +14,8 @@ module.exports = defineConfig({
         launchOptions.args.push("--disable-gpu-shader-disk-cache");
       });
 
-      const port = "3000";
+      // Port 0 lets the OS pick a free port, so parallel test targets don't collide.
+      const port = "0";
       return new Promise((resolve, reject) => {
         // Launch the server
         const workspaceRoot = join(
@@ -33,9 +34,10 @@ module.exports = defineConfig({
         serverProcess.stdout.on("data", (data) => {
           data = data.toString();
           console.log(data);
-          if (data.includes(`Example app listening on port ${port}`)) {
+          const match = data.match(/Example app listening on port (\d+)/);
+          if (match) {
             // Tell cypress where server is running
-            resolve({ ...config, baseUrl: `http://localhost:${port}` });
+            resolve({ ...config, baseUrl: `http://localhost:${match[1]}` });
           }
         });
         serverProcess.stderr.on("data", (data) => {
