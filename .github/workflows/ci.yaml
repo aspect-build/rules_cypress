@@ -54,17 +54,24 @@ jobs:
             - name: Test
               working-directory: ${{ matrix.workspace.path }}
               run: aspect test --task-key=test-${{ matrix.workspace.slug }}-${{ matrix.bazel.id }} ${{ matrix.bazel.flags }} -- //...
-    # macOS smoke - only e2e/workspace on the primary Bazel version.
+    # macOS smoke - only e2e/workspace, same Bazel versions as the BCR presubmit.
     # Only run on main (not PRs) to minimize minutes (macOS is billed at 10X).
     # https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions#included-storage-and-minutes
     # NB: Windows is not covered — there is no Cypress toolchain registered for it
     # (//cypress:toolchain_type has no matching toolchains on Windows).
     smoke:
-        name: smoke (macos, e2e/workspace)
+        name: smoke (macos, e2e/workspace, ${{ matrix.bazel.id }})
         if: github.ref_name == 'main' || contains(github.head_ref, 'macos')
         runs-on: macos-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                bazel:
+                - { id: "bazel-7", version: "7.x", flags: "--bazel-flag=--test_tag_filters=-skip-on-bazel7" }
+                - { id: "bazel-8", version: "8.x", flags: "--bazel-flag=--test_tag_filters=-skip-on-bazel8" }
+                - { id: "bazel-9", version: "9.x", flags: "--bazel-flag=--test_tag_filters=-skip-on-bazel9" }
         env:
-            USE_BAZEL_VERSION: "7.x"
+            USE_BAZEL_VERSION: ${{ matrix.bazel.version }}
         steps:
             - uses: actions/checkout@v6
             - uses: aspect-build/setup-aspect@c22a8f64fb38f82f59ce809cd7eb9f8ae096da44 # v2026.23.2
@@ -72,7 +79,7 @@ jobs:
                 aspect-api-token: ${{ secrets.ASPECT_API_TOKEN }}
             - name: Test
               working-directory: e2e/workspace
-              run: aspect test --task-key=smoke-e2e-workspace --bazel-flag=--test_tag_filters=-skip-on-bazel7 -- //...
+              run: aspect test --task-key=smoke-e2e-workspace-${{ matrix.bazel.id }} ${{ matrix.bazel.flags }} -- //...
     # Provides a stable job name for branch protection rules, gating on the test
     # and smoke jobs above.
     conclusion:
