@@ -3,10 +3,11 @@
 module(
     name = "aspect_rules_cypress",
     version = "0.0.0",
+    bazel_compatibility = [">=8.5.0"],
     compatibility_level = 1,
 )
 
-# Lower-bounds (minimum) versions for direct runtime dependencies, supporting Bazel 7-9.
+# Lower-bounds (minimum) versions for direct runtime dependencies, supporting Bazel 8.5+.
 bazel_dep(name = "bazel_lib", version = "3.0.0")
 bazel_dep(name = "aspect_rules_js", version = "3.0.1")
 bazel_dep(name = "aspect_tools_telemetry", version = "0.5.2")

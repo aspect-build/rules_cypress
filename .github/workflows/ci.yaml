@@ -41,7 +41,6 @@ jobs:
                 - { path: ".", slug: "root" }
                 - { path: "e2e/workspace", slug: "e2e-workspace" }
                 bazel:
-                - { id: "bazel-7", version: "7.x", flags: "--bazel-flag=--test_tag_filters=-skip-on-bazel7" }
                 - { id: "bazel-8", version: "8.x", flags: "--bazel-flag=--test_tag_filters=-skip-on-bazel8" }
                 - { id: "bazel-9", version: "9.x", flags: "--bazel-flag=--test_tag_filters=-skip-on-bazel9" }
         env:
@@ -67,7 +66,6 @@ jobs:
             fail-fast: false
             matrix:
                 bazel:
-                - { id: "bazel-7", version: "7.x", flags: "--bazel-flag=--test_tag_filters=-skip-on-bazel7" }
                 - { id: "bazel-8", version: "8.x", flags: "--bazel-flag=--test_tag_filters=-skip-on-bazel8" }
                 - { id: "bazel-9", version: "9.x", flags: "--bazel-flag=--test_tag_filters=-skip-on-bazel9" }
         env:
