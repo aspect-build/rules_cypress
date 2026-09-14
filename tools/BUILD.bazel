@@ -3,10 +3,7 @@ load("@bazelrc-preset.bzl", "bazelrc_preset")
 bazelrc_preset(
     name = "preset",
     doc_link_template = "https://registry.build/flag/bazel?filter={flag}",
-    # The output is specific to the version in .bazelversion (currently 7.x),
+    # The output is specific to the version in .bazelversion (currently 8.x),
     # so the generated-vs-committed check only holds on the primary version.
-    tags = [
-        "skip-on-bazel8",
-        "skip-on-bazel9",
-    ],
+    tags = ["skip-on-bazel9"],
 )
