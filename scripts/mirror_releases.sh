@@ -1,17 +1,21 @@
 #!/usr/bin/env bash
-# Produce a dictionary for the current cypress release,
-# suitable for appending to cypress/private/versions.bzl
-set -o errexit -o nounset
-SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
-CYPRESS_VERSION_ARG="${1:-latest}"
+# Print the versions.bzl entry for a cypress release (default: latest on npm).
+set -o errexit -o nounset -o pipefail
 
-version="${1:-$(curl --silent "https://registry.npmjs.org/cypress/$CYPRESS_VERSION_ARG" | jq --raw-output ".version")}"
+version="${1:-$(curl --fail --silent https://registry.npmjs.org/cypress/latest | jq --raw-output .version)}"
 
+seen=""
 echo "    \"$version\": {"
-for pkg in darwin-{x,arm}64 linux-{x,arm}64 win32-x64; do
-	sha256=($(curl -sL "https://cdn.cypress.io/desktop/${version}/${pkg}/cypress.zip" | shasum -a 256))
-	echo "        \"$pkg\": \"$sha256\","
+for platform in darwin-x64 darwin-arm64 linux-x64 linux-arm64; do
+	url="https://cdn.cypress.io/desktop/$version/$platform/cypress.zip"
+	sha256=$(curl --fail --silent --location "$url" | shasum -a 256 | cut -d ' ' -f 1)
+	case "$seen" in
+	*"$sha256"*)
+		echo "error: $platform hash matches another platform; download of $url is suspect" >&2
+		exit 1
+		;;
+	esac
+	seen="$seen $sha256"
+	echo "        \"$platform\": \"$sha256\","
 done
 echo "    },"
-echo
-echo "Now paste the code block above into /cypress/private/versions.bzl"
