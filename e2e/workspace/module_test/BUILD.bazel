@@ -1,4 +1,5 @@
 load("@aspect_rules_cypress//cypress:defs.bzl", "cypress_module_test")
+load("//:cypress13.bzl", "cypress13_data", "cypress13_env")
 
 cypress_module_test(
     name = "module_test",
@@ -8,5 +9,19 @@ cypress_module_test(
         "cypress.config.js",
         "module_test.cy.js",
     ],
+    runner = "runner.js",
+)
+
+cypress_module_test(
+    name = "module_test13",
+    timeout = "short",
+    chdir = package_name(),
+    cypress = "//:node_modules/cypress13",
+    data = [
+        "cypress.config.js",
+        "module_test.cy.js",
+    ] + cypress13_data(),
+    env = cypress13_env(chdir = package_name()),
+    no_copy_to_bin = cypress13_data(),
     runner = "runner.js",
 )

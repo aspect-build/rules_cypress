@@ -1,5 +1,6 @@
 load("@aspect_rules_cypress//cypress:defs.bzl", "cypress_test")
 load("@aspect_rules_js//js:defs.bzl", "js_binary")
+load("//:cypress13.bzl", "cypress13_data", "cypress13_env")
 
 js_binary(
     name = "server",
@@ -20,4 +21,22 @@ cypress_test(
         ":server",
         "//:node_modules",
     ],
+)
+
+cypress_test(
+    name = "server_example13",
+    timeout = "short",
+    args = [
+        "run",
+        "--config-file=server_example/cypress.config.js",
+    ],
+    cypress = "//:node_modules/cypress13",
+    data = [
+        "cypress.config.js",
+        "server_example_test.cy.js",
+        ":server",
+        "//:node_modules",
+    ] + cypress13_data(),
+    env = cypress13_env(),
+    no_copy_to_bin = cypress13_data(),
 )

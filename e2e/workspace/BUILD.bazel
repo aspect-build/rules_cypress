@@ -2,5 +2,8 @@
 """
 
 load("@npm//:defs.bzl", "npm_link_all_packages")
+load(":cypress13.bzl", "cypress13_config_settings")
 
 npm_link_all_packages(name = "node_modules")
+
+cypress13_config_settings(name = "cypress13")
