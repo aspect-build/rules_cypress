@@ -20,7 +20,7 @@ buildifier(
     exclude_patterns = ["./.git/*"],
     lint_mode = "fix",
     mode = "fix",
-    tags = ["manual"],  # tag as manual so windows ci does not build it by default
+    tags = ["manual"],
 )
 
 buildifier(
@@ -28,7 +28,7 @@ buildifier(
     exclude_patterns = ["./.git/*"],
     lint_mode = "warn",
     mode = "diff",
-    tags = ["manual"],  # tag as manual so windows ci does not build it by default
+    tags = ["manual"],
 )
 
 alias(
