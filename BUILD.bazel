@@ -1,6 +1,5 @@
 load("@bazel_skylib//rules:build_test.bzl", "build_test")
 load("@buildifier_prebuilt//:rules.bzl", "buildifier")
-load("@npm//:defs.bzl", "npm_link_all_packages")
 
 # A version-independent test so `bazel test //...` always has at least one test
 # target on every Bazel version in CI (the //tools:preset self-test is skipped
@@ -36,5 +35,3 @@ alias(
     name = "format",
     actual = "//tools/format",
 )
-
-npm_link_all_packages(name = "node_modules")
