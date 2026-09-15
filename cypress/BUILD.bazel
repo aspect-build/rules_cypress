@@ -10,21 +10,11 @@ toolchain_type(
 )
 
 bzl_library(
-    name = "repositories",
-    srcs = ["repositories.bzl"],
-    visibility = ["//visibility:public"],
-    deps = [
-        "//cypress/private:versions",
-        "@aspect_rules_cypress//cypress/private:toolchains_repo",
-    ],
-)
-
-bzl_library(
     name = "extensions",
     srcs = ["extensions.bzl"],
     visibility = ["//visibility:public"],
     deps = [
-        ":repositories",
+        "//cypress/private:repositories",
         "@aspect_tools_telemetry_report//:defs.bzl",
     ],
 )

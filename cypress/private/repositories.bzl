@@ -1,15 +1,8 @@
-"""Declare runtime dependencies
+"""Repository rules backing the cypress module extension."""
 
-These are needed for local dev, and users must install them as well.
-See https://docs.bazel.build/versions/main/skylark/deploying.html#dependencies
-"""
+load(":toolchains_repo.bzl", "PLATFORMS", "toolchains_repo")
+load(":versions.bzl", "TOOL_VERSIONS")
 
-load("//cypress/private:toolchains_repo.bzl", "PLATFORMS", "toolchains_repo")
-load("//cypress/private:versions.bzl", "TOOL_VERSIONS")
-
-########
-# Remaining content of the file is only used to support toolchains.
-########
 _DOC = "Fetch external tools needed for cypress toolchain"
 _ATTRS = {
     "version": attr.string(mandatory = True),
@@ -38,7 +31,6 @@ cypress_repositories = repository_rule(
     attrs = _ATTRS,
 )
 
-# Wrapper macro around everything above, this is the primary API
 def cypress_register_toolchains(name, cypress_version, cypress_integrity = {}):
     """
     Convenience macro for setting up cypress toolchain for all supported platforms.
