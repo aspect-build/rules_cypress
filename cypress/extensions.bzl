@@ -11,6 +11,7 @@ def _toolchain_extension(module_ctx):
                 cypress_version = toolchain.cypress_version,
                 cypress_integrity = toolchain.cypress_integrity,
             )
+    return module_ctx.extension_metadata(reproducible = True)
 
 cypress = module_extension(
     implementation = _toolchain_extension,
@@ -22,6 +23,7 @@ cypress = module_extension(
             ),
             "cypress_version": attr.string(
                 doc = "Version of cypress to download",
+                mandatory = True,
             ),
             "cypress_integrity": attr.string_dict(
                 doc = "Mapping from platform to integrity file hash. See cypress_register_toolchains",
