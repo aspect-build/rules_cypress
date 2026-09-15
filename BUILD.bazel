@@ -10,7 +10,6 @@ build_test(
     targets = [
         "//cypress:defs",
         "//cypress:extensions",
-        "//cypress:repositories",
         "//cypress:toolchain",
     ],
 )
