@@ -4,10 +4,8 @@
 CypressInfo = provider(
     doc = "Information about how to invoke the tool executable.",
     fields = {
-        "target_tool_path": "Path to the tool executable for the target platform.",
-        "tool_files": """Files required in runfiles to make the tool executable available.
-
-May be empty if the target_tool_path points to a locally installed tool binary.""",
+        "target_tool": "The tool executable for the target platform.",
+        "tool_files": "Files required in runfiles to make the tool executable available.",
     },
 )
 
@@ -19,29 +17,19 @@ def _to_manifest_path(ctx, file):
         return ctx.workspace_name + "/" + file.short_path
 
 def _cypress_toolchain_impl(ctx):
-    if ctx.attr.target_tool and ctx.attr.target_tool_path:
-        fail("Can only set one of target_tool or target_tool_path but both were set.")
-    if not ctx.attr.target_tool and not ctx.attr.target_tool_path:
-        fail("Must set one of target_tool or target_tool_path.")
-
-    tool_files = []
-    target_tool_path = ctx.attr.target_tool_path
-
-    if ctx.attr.target_tool:
-        tool_files = ctx.attr.target_tool_files.files.to_list()
-        target_tool_path = _to_manifest_path(ctx, ctx.attr.target_tool.files.to_list()[0])
+    tool_files = ctx.files.target_tool_files
 
     # Make the $(tool_BIN) variable available in places like genrules.
     # See https://docs.bazel.build/versions/main/be/make-variables.html#custom_variables
     template_variables = platform_common.TemplateVariableInfo({
-        "CYPRESS_BIN": target_tool_path,
+        "CYPRESS_BIN": _to_manifest_path(ctx, ctx.file.target_tool),
     })
     default = DefaultInfo(
         files = depset(tool_files),
         runfiles = ctx.runfiles(files = tool_files),
     )
     cypressinfo = CypressInfo(
-        target_tool_path = target_tool_path,
+        target_tool = ctx.file.target_tool,
         tool_files = tool_files,
     )
 
@@ -63,17 +51,13 @@ cypress_toolchain = rule(
     attrs = {
         "target_tool": attr.label(
             doc = "A hermetically downloaded executable target for the target platform.",
-            mandatory = False,
+            mandatory = True,
             allow_single_file = True,
         ),
         "target_tool_files": attr.label(
             doc = "Files required in runfiles to make the cypress executable available.",
-            mandatory = False,
+            mandatory = True,
             allow_files = True,
-        ),
-        "target_tool_path": attr.string(
-            doc = "Path to an existing executable for the target platform.",
-            mandatory = False,
         ),
     },
     doc = """Defines a cypress compiler/runtime toolchain.

@@ -63,16 +63,10 @@ def cypress_test(
                 Timed out waiting for the browser to connect. Retrying again...
                 The browser never connected. Something is wrong. The tests cannot run. Aborting...
         browsers: A sequence of labels specifying the browsers to include.
-            Usually, any dependency that you wish to be included in the runfiles tree should
-            be included within the data attribute. However, data dependencies, by default,
-            are copied to the Bazel output tree before being passed as inputs to runfiles.
-
-            This is not a good default behavior for browser since these typically come from
-            external workspaces which cannot be symlinked into bazel-bin. Instead, we
-            place them at the root of the runfiles tree. Use relative paths to construct
-            account for this placement
-
-            e.g. ../../../BROWSER_WORKSPACE_NAME
+            Unlike `data`, these files are added to runfiles without going through the
+            `DefaultInfo` of their targets, so browser binaries from external repositories are not
+            copied into the output tree. They live at the root of the runfiles tree, so reference
+            them with a path relative to the workspace: `../BROWSER_REPOSITORY_NAME/...`
         **kwargs: All other args from `js_test`. See https://github.com/aspect-build/rules_js/blob/main/docs/js_binary.md#js_test
     """
     entry_point = "%s__entry_point" % name
@@ -154,16 +148,10 @@ def cypress_module_test(
                 Timed out waiting for the browser to connect. Retrying again...
                 The browser never connected. Something is wrong. The tests cannot run. Aborting...
         browsers: A sequence of labels specifying the browsers to include.
-            Usually, any dependency that you wish to be included in the runfiles tree should
-            be included within the data attribute. However, data dependencies, by default,
-            are copied to the Bazel output tree before being passed as inputs to runfiles.
-
-            This is not a good default behavior for browser since these typically come from
-            external workspaces which cannot be symlinked into bazel-bin. Instead, we
-            place them at the root of the runfiles tree. Use relative paths to construct
-            account for this placement
-
-            e.g. ../../../BROWSER_WORKSPACE_NAME
+            Unlike `data`, these files are added to runfiles without going through the
+            `DefaultInfo` of their targets, so browser binaries from external repositories are not
+            copied into the output tree. They live at the root of the runfiles tree, so reference
+            them with a path relative to the workspace: `../BROWSER_REPOSITORY_NAME/...`
         **kwargs: All other args from `js_test`. See https://github.com/aspect-build/rules_js/blob/main/docs/js_binary.md#js_test
     """
     _cypress_test_macro(

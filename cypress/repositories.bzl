@@ -7,8 +7,6 @@ See https://docs.bazel.build/versions/main/skylark/deploying.html#dependencies
 load("//cypress/private:toolchains_repo.bzl", "PLATFORMS", "toolchains_repo")
 load("//cypress/private:versions.bzl", "TOOL_VERSIONS")
 
-LATEST_CYPRESS_VERSION = TOOL_VERSIONS.keys()[0]
-
 ########
 # Remaining content of the file is only used to support toolchains.
 ########
@@ -41,7 +39,7 @@ cypress_repositories = repository_rule(
 )
 
 # Wrapper macro around everything above, this is the primary API
-def cypress_register_toolchains(name, cypress_version = None, cypress_integrity = {}):
+def cypress_register_toolchains(name, cypress_version, cypress_integrity = {}):
     """
     Convenience macro for setting up cypress toolchain for all supported platforms.
 
@@ -55,7 +53,7 @@ def cypress_register_toolchains(name, cypress_version = None, cypress_integrity 
 
         cypress_integrity: Mapping from platform to integrity file hash.
 
-            Valid platform values are: darwin-x64, darwin-arm64, linux-x64, linux-arm64, win32-x64. See @aspect_rules_cypress//cypress/private:versions.bzl
+            Valid platform values are: darwin-x64, darwin-arm64, linux-x64, linux-arm64. See @aspect_rules_cypress//cypress/private:versions.bzl
 
             We have provided a helper script to help generate these integrity hashes.
 
@@ -70,7 +68,7 @@ def cypress_register_toolchains(name, cypress_version = None, cypress_integrity 
             fail("""\
 cypress version {} is not currently mirrored into rules_cypress.
 Please instead choose one of these available versions: {}
-Or, make a PR to the repo running /scripts/mirror_release.sh to add the newest version.
+Or, make a PR to the repo running /scripts/mirror_releases.sh to add the newest version.
 Alternately, you may manually specify platform integrity hashes with cypress_integrity.""".format(cypress_version, TOOL_VERSIONS.keys()))
         cypress_integrity = TOOL_VERSIONS[cypress_version]
 
