@@ -5,7 +5,7 @@ local_path_override(
 )
 
 cypress = use_extension("@aspect_rules_cypress//cypress:extensions.bzl", "cypress", dev_dependency = True)
-cypress.toolchain(cypress_version = "15.10.0")
+cypress.toolchain(cypress_version = "16.0.0")
 cypress.toolchain(
     name = "cypress13",
     cypress_version = "13.0.0",
