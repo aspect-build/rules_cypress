@@ -7,7 +7,7 @@ _DOC = "Fetch external tools needed for cypress toolchain"
 _ATTRS = {
     "version": attr.string(mandatory = True),
     "platform": attr.string(mandatory = True, values = PLATFORMS.keys()),
-    "sha256": attr.string(),
+    "sha256": attr.string(mandatory = True),
 }
 
 def _cypress_repo_impl(repository_ctx):
@@ -69,7 +69,7 @@ Alternately, you may manually specify platform integrity hashes with cypress_int
             name = name + "_" + platform,
             version = cypress_version,
             platform = platform,
-            sha256 = cypress_integrity.get(platform, None),
+            sha256 = cypress_integrity[platform],
         )
 
     toolchains_repo(
