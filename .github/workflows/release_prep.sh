@@ -17,7 +17,15 @@ Add to your \`MODULE.bazel\` file:
 
 \`\`\`starlark
 bazel_dep(name = "aspect_rules_cypress", version = "${TAG:1}", dev_dependency = True)
+
+cypress = use_extension("@aspect_rules_cypress//cypress:extensions.bzl", "cypress", dev_dependency = True)
+cypress.toolchain(cypress_version = "16.0.0")
+use_repo(cypress, "cypress_toolchains")
+
+register_toolchains("@cypress_toolchains//:all")
 \`\`\`
+
+Requires Bazel 8.5+ and rules_js 3.x. See the [README](https://github.com/aspect-build/rules_cypress#readme) for usage.
 
 [Bzlmod]: https://bazel.build/build/bzlmod
 EOF
