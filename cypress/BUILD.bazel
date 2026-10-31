@@ -15,7 +15,6 @@ bzl_library(
     visibility = ["//visibility:public"],
     deps = [
         "//cypress/private:repositories",
-        "@aspect_tools_telemetry_report//:defs.bzl",
     ],
 )
 
