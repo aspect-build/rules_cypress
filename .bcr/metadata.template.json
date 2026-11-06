@@ -7,9 +7,14 @@
       "name": "Greg Magolan"
     },
     {
-      "email": "jason@aspect.build",
+      "email": "jason@jbedard.ca",
       "github": "jbedard",
       "name": "Jason Bedard"
+    },
+    {
+      "email": "adamc@aspect.build",
+      "github": "acozzette",
+      "name": "Adam Cozzette"
     }
   ],
   "repository": ["github:aspect-build/rules_cypress"],
